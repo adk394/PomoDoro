@@ -45,8 +45,8 @@ body {
   justify-content: center;
   font-family: "SFPro";
   min-height: 90vh;
-    /* Background with image */
-    background-color: #e7e7e7;
+  /* Background with image */
+  background-image: linear-gradient(rgb(221, 221, 221), rgb(255, 255, 255));
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -181,28 +181,31 @@ button:hover {
 
 .submenu {
   padding: 0rem;
-  border: 2px #171717 solid;
   list-style: none;
-  left: 7rem;
+  left: 7.25rem;
   position: absolute;
-  background-color: rgb(228, 228, 228);
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.35);
+  border: 1px white solid;
+  background-color: rgba(255, 255, 255, 0.808);
   display: none;
   padding-bottom: 0.5rem;
   width: 6rem;
   border-radius: 0.5rem;
-
 }
 
 .settingsButton {
   background-color: #30303000;
   border: 0px;
   padding: 0.5rem;
+  transition: 300ms;
 }
 
 .settingsButton:hover {
-  background-color: rgba(255, 255, 255, 0.103);
+  transition: 300ms;
+  background-color: rgba(255, 255, 255, 0.158);
   border: 0px;
   padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .submenu.open {
@@ -294,6 +297,7 @@ button:hover {
   font-family: "SFPro";
   font-size: 2.5rem;
   margin: 0rem;
+  font-weight: 500;
 }
 
 #Start {
