@@ -17,6 +17,10 @@
   color: #050505; /* color del texto seleccionado */
 }
 
+a {
+  color: black;
+}
+
 p {
   margin: 0rem;
 }
@@ -62,6 +66,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
   /* ---------------------- */
 }
 
@@ -70,6 +75,14 @@ li {
   cursor: pointer;
   font-family: "SFPro";
   font-size: 1rem;
+}
+
+input {
+  background-color: rgba(255, 255, 255, 0);
+  padding: 0.5rem;
+  color: white;
+  border: 1px white solid;
+  border-radius: 0.5rem;
 }
 
 button:hover {
@@ -101,27 +114,6 @@ button:hover {
 .time {
   text-align: center;
   width: 50%;
-}
-
-.clockMainDiv {
-  display: flex;
-  border: 1px white solid;
-  flex-direction: column;
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-  /* Background with image */
-  background-image: url(/backgrounds/original.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  /* ---------------------- */
-  color: white;
-  font-family: "SFPro";
-  width: 45%;
-  border-radius: 2rem;
-  padding: 0rem;
-  gap: 0rem;
 }
 
 .switchState {
@@ -251,7 +243,95 @@ button:hover {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+.blurred {
+  filter: blur(2px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.btnOverlay {
+  transition: 150ms;
+  background-color: #ffffff00;
+  border: 1px white solid;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 35%;
+}
+
+.btnOverlay:hover {
+  transition: 300ms;
+  background-color: #ffffff;
+  border: 1px white solid;
+  color: black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 35%;
+}
+
+.clockMainDiv {
+  display: flex;
+  border: 1px white solid;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+  /* Background with image */
+  background-image: url(/backgrounds/original.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  /* ---------------------- */
+  color: white;
+  font-family: "SFPro";
+  width: 45%;
+  border-radius: 2rem;
+  padding: 0rem;
+  gap: 0rem;
+}
+
+#mainOverlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  border: 2px white solid;
+  color: white;
+  background-color: #171717;
+  border-radius: 1rem;
+  padding: 3rem;
+}
+
+#closeOverlay {
+  display: flex;
+  justify-self: end;
+  transition: 300ms;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 1rem;
+  border: 0px;
+  padding: 0.25rem;
+}
+
+#buttonOverlaySection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  gap: 1rem;
+
+}
+
+#closeOverlay:hover {
+  transition: 300ms;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 1rem;
+  border: 0px;
+  padding: 0.25rem;
+  scale: 1.25;
 }
 
 #themeSelect {
@@ -271,11 +351,10 @@ button:hover {
 }
 
 #minFlow:hover {
-    cursor: pointer;
+  cursor: pointer;
   color: white;
   background-color: rgba(102, 102, 102, 0.75);
   border-radius: 0.5rem;
-
 }
 
 #minShort {
@@ -291,7 +370,7 @@ button:hover {
 }
 
 #minShort:hover {
-    cursor: pointer;
+  cursor: pointer;
   color: white;
   background-color: rgba(102, 102, 102, 0.75);
   border-radius: 0.5rem;

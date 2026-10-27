@@ -1,3 +1,5 @@
+import { supabase } from "./supabase.js";
+
 let times = {
   seconds: document.getElementById("seconds"),
   minutes: document.getElementById("minutes"),
@@ -29,20 +31,102 @@ let clocks = {
   },
 };
 
-///---BOTON DE START Y BOTON DE STOP
+///--- SUPABASE
 
-///---START
+const authForm = document.getElementById("authForm");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const btnRegistro = document.getElementById("btnRegister");
+
+async function probarSupabase() {
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error || !user) {
+    console.log("No has iniciado sesión");
+    return;
+  }
+
+  const { error: errorGuardar } = await supabase.from("clocks").upsert(
+    {
+      user_id: user.id,
+      flow_minutes: Number(clocks.flow.minutes),
+      flow_seconds: Number(clocks.flow.seconds),
+      short_minutes: Number(clocks.shortPause.minutes),
+      short_seconds: Number(clocks.shortPause.seconds),
+      long_minutes: Number(clocks.longPause.minutes),
+      long_seconds: Number(clocks.longPause.seconds),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      onConflict: "user_id",
+    },
+  );
+
+  if (errorGuardar) {
+    console.log("Error al guardar:", errorGuardar.message);
+    return;
+  }
+
+  console.log("¡Tiempos guardados correctamente!");
+}
+
+// Register
+
+btnRegistro.addEventListener("click", async () => {
+  const { data, error } = await supabase.auth.signUp({
+    email: emailInput.value,
+    password: passwordInput.value,
+  });
+  console.log("Registro:", data, error);
+});
+
+// Login
+
+authForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: emailInput.value,
+    password: passwordInput.value,
+  });
+  if (error) {
+    console.log("Error al entrar:", error.message);
+    return;
+  }
+  console.log("Login correcto:", data, error);
+  await probarSupabase();
+});
+
+// ------------------------------------------------------------
 
 let startButton = document.getElementById("Start");
 let intervalClock = null;
 let buttonMenu = document.querySelectorAll(".configNav button");
 
-let selectorClock = document.getElementById("selectTimer");
-
 let endClockMinutes = document.getElementById("endMin");
 let endClockHours = document.getElementById("endHours");
 
-console.log(Notification.requestPermission());
+let loginButton = document.getElementById("loginButton");
+
+let closeOverlay = document.getElementById("closeOverlay");
+let overlay = document.getElementById("mainOverlay");
+
+let themeSelector = document.querySelectorAll(".configNav #themeSelect");
+let clockMainDiv = document.querySelector(".clockMainDiv");
+
+let objectSelected
+
+loginButton.addEventListener("click", () => {
+  overlay.classList.remove("hidden");
+  clockMainDiv.classList.add("blurred");
+});
+
+closeOverlay.addEventListener("click", () => {
+  overlay.classList.add("hidden");
+  clockMainDiv.classList.remove("blurred");
+});
 
 function avisar(title, message) {
   if (Notification.permission === "granted") {
@@ -80,7 +164,7 @@ resetButton.addEventListener("click", () => {
   objectSelected.minutes = "00";
   times.seconds.innerHTML = objectSelected.seconds;
   times.minutes.innerHTML = objectSelected.minutes;
-  stopTimer()
+  stopTimer();
 });
 
 function advanceOnClock() {
@@ -300,9 +384,6 @@ longButton.addEventListener("click", () => {
 });
 
 // -----------------------------------------------
-
-let themeSelector = document.querySelectorAll(".configNav #themeSelect");
-let clockMainDiv = document.querySelector(".clockMainDiv");
 
 themeSelector.forEach((theme) => {
   theme.addEventListener("click", () => {
