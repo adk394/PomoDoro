@@ -1,4 +1,4 @@
-import { supabase } from "./supabase.js";
+import { supabase } from "./database/supabase.js";
 
 let times = {
   seconds: document.getElementById("seconds"),
@@ -11,21 +11,21 @@ let clocks = {
     title: "Flow",
     lap: 1,
     minutes: "00",
-    seconds: "00",
+    seconds: "01",
     isSelected: true,
     isActive: false,
   },
   shortPause: {
     title: "Corto",
     minutes: "00",
-    seconds: "00",
+    seconds: "01",
     isSelected: false,
     isActive: false,
   },
   longPause: {
     title: "Largo",
     minutes: "00",
-    seconds: "00",
+    seconds: "01",
     isSelected: false,
     isActive: false,
   },
@@ -101,6 +101,8 @@ authForm.addEventListener("submit", async (e) => {
 
 // ------------------------------------------------------------
 
+console.log(Notification.requestPermission(NavigationPrecommitController))
+
 let startButton = document.getElementById("Start");
 let intervalClock = null;
 let buttonMenu = document.querySelectorAll(".configNav button");
@@ -116,7 +118,7 @@ let overlay = document.getElementById("mainOverlay");
 let themeSelector = document.querySelectorAll(".configNav #themeSelect");
 let clockMainDiv = document.querySelector(".clockMainDiv");
 
-let objectSelected
+let objectSelected;
 
 loginButton.addEventListener("click", () => {
   overlay.classList.remove("hidden");
@@ -174,11 +176,11 @@ function advanceOnClock() {
   if (objectSelected.title === "Flow" && clocks.flow.lap == 1) {
     adjustSelectedClock("shortPause");
     clocks.flow.lap = 2;
-  } else if (objectSelected.title === "Short Pause") {
+  } else if (objectSelected.title === "Corto") {
     adjustSelectedClock("flow");
   } else if (objectSelected.title === "Flow" && clocks.flow.lap == 2) {
     adjustSelectedClock("longPause");
-  } else if (objectSelected.title === "LongPause") {
+  } else if (objectSelected.title === "Largo") {
     adjustSelectedClock("flow");
     clocks.flow.lap = 1;
   }
@@ -235,11 +237,11 @@ startButton.addEventListener("click", () => {
   endClockHours.innerHTML = currentHours;
 
   if (endMinutes < 10) {
-    endClockMinutes.innerHTML.padStart(2, "0");
+    endClockMinutes.innerHTML = endClockMinutes.innerHTML.padStart(2, "0");
   }
 
   if (currentHours < 10) {
-    endClockHours.innerHTML.padStart(2, "0");
+    endClockHours.innerHTML = endClockHours.innerHTML.padStart(2, "0");
   }
 
   if (
@@ -402,9 +404,6 @@ function whatClockIsSelected() {
 }
 
 let clockTitle = document.getElementById("clockTitle");
-
-let selectorTimeFlowMin = document.getElementById("selectorFlowMin");
-let selectorTimeFlowSec = document.getElementById("selectorFlowSec");
 
 let minsFlow = document.querySelectorAll(".configNav #minFlow");
 let minsShort = document.querySelectorAll(".configNav #minShort");

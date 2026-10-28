@@ -1,13 +1,15 @@
 @font-face {
   font-family: "SFPro";
-  src: url("./fonts/sf-pro-display/SFPRODISPLAYREGULAR.OTF") format("opentype");
+  src: url("./items/fonts/sf-pro-display/SFPRODISPLAYREGULAR.OTF")
+    format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "SFPro Regular";
-  src: url("./fonts/sf-pro-display/SFPRODISPLAYREGULAR.OTF") format("opentype");
+  src: url("./items/fonts/sf-pro-display/SFPRODISPLAYREGULAR.OTF")
+    format("opentype");
   font-weight: 400;
   font-style: normal;
 }
@@ -83,6 +85,10 @@ input {
   color: white;
   border: 1px white solid;
   border-radius: 0.5rem;
+}
+
+button {
+  z-index: 9999;
 }
 
 button:hover {
@@ -185,14 +191,15 @@ button:hover {
 .submenu {
   padding: 0rem;
   list-style: none;
-  left: 7.25rem;
+  left: 9.25rem;
   position: absolute;
-  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.35);
-  border: 1px white solid;
-  background-color: rgba(255, 255, 255, 0.808);
+  box-shadow: 0 8px 24px 0 rgba(255, 255, 255, 0.05);
+  border: 1px rgba(255, 255, 255, 0.904) solid;
+  background-color: rgba(255, 255, 255, 0.75) ;
+  backdrop-filter: blur(2px);
   display: none;
   padding-bottom: 0.5rem;
-  width: 6rem;
+  width: 8rem;
   border-radius: 0.5rem;
 }
 
@@ -215,6 +222,7 @@ button:hover {
   display: block;
   position: absolute;
   padding: 0.5rem;
+
 }
 
 .blob {
@@ -280,7 +288,7 @@ button:hover {
   align-items: center;
   text-align: center;
   /* Background with image */
-  background-image: url(/backgrounds/original.svg);
+  background-image: url(/items/backgrounds/original.svg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -291,6 +299,21 @@ button:hover {
   border-radius: 2rem;
   padding: 0rem;
   gap: 0rem;
+}
+
+#menuSoftTitle {
+  cursor:auto;
+  font-family: "SFPro";
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  padding-left: 0.25rem;
+  border-bottom: 2px #0000001f solid;
+  height: 1.5rem;
+  font-size: 0.8rem;
+  transition: 150ms;
+  background-color: #ffffff00;
+  color: rgb(32, 32, 32);
 }
 
 #mainOverlay {
@@ -322,7 +345,6 @@ button:hover {
   align-items: center;
   padding-top: 2rem;
   gap: 1rem;
-
 }
 
 #closeOverlay:hover {
