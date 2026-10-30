@@ -7,7 +7,7 @@
     .ola3 { animation: balanceo 10s ease-in-out infinite alternate; }
     @keyframes balanceo {
       from { transform: translateY(0); }
-      to   { transform: translateY(-15px); }
+      to   { transform: translateY(-20px); }
     }
   </style>
     <rect x="0" y="0" width="900" height="600" fill="#f3f3f3"></rect>

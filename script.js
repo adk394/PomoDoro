@@ -1,5 +1,20 @@
 import { supabase } from "./database/supabase.js";
 
+let music = [
+  {
+    title: "Jazz Song",
+    artist: "Anon",
+    src: "/items/music/jazz.mp3",
+    icon: "/items/music/icons/jazz.png",
+  },
+  {
+    title: "Minecraft - Minecraft Volume Alpha",
+    artist: "C418",
+    src: "/items/music/minecraft1.mp3",
+    icon: "/items/music/icons/minecraft1.png",
+  },
+];
+
 let times = {
   seconds: document.getElementById("seconds"),
   minutes: document.getElementById("minutes"),
@@ -8,23 +23,23 @@ let times = {
 let clocks = {
   cicles: 1,
   flow: {
-    title: "Flow",
+    title: "Pomodoro",
     lap: 1,
-    minutes: "00",
+    minutes: "25",
     seconds: "00",
     isSelected: true,
     isActive: false,
   },
   shortPause: {
-    title: "Corto",
-    minutes: "00",
+    title: "Short Break",
+    minutes: "05",
     seconds: "00",
     isSelected: false,
     isActive: false,
   },
   longPause: {
-    title: "Largo",
-    minutes: "00",
+    title: "Long Break",
+    minutes: "10",
     seconds: "00",
     isSelected: false,
     isActive: false,
@@ -101,7 +116,82 @@ authForm.addEventListener("submit", async (e) => {
 
 // ------------------------------------------------------------
 
-console.log(Notification.requestPermission(NavigationPrecommitController))
+// Music Player
+
+let musicAudio = document.getElementById("musicAudio");
+
+let startMiniRep = document.getElementById("playMiniRep");
+let stopMiniRep = document.getElementById("stopMiniRep");
+
+let volumeMiniRep = document.getElementById("volumeMiniRep");
+let audioRange = document.getElementById("audioRange");
+
+let advanceMiniRep = document.getElementById("advanceMiniRep");
+let backMiniRep = document.getElementById("backMiniRep");
+let musicIcon = document.getElementById("musicIcon");
+
+let currentSong = 0;
+
+let musicTitle = document.getElementById("musicTitle");
+let musicSubtitle = document.getElementById("musicSubtitle");
+
+updateMusicMiniRep();
+
+audioRange.addEventListener("input", () => {
+  musicAudio.volume = audioRange.value;
+
+  if (musicAudio.volume > 0) {
+    musicAudio.muted = false;
+  }
+});
+
+function updateMusicMiniRep() {
+  musicTitle.innerHTML = music[currentSong].title;
+  musicSubtitle.innerHTML = music[currentSong].artist;
+}
+
+volumeMiniRep.addEventListener("click", () => {
+  audioRange.classList.toggle("hidden");
+});
+
+startMiniRep.addEventListener("click", () => {
+  musicAudio.src = music[currentSong].src;
+  musicAudio.play();
+  startMiniRep.classList.add("hidden");
+  stopMiniRep.classList.remove("hidden");
+});
+
+stopMiniRep.addEventListener("click", () => {
+  musicAudio.src = music[currentSong].src;
+  musicAudio.pause();
+  startMiniRep.classList.remove("hidden");
+  stopMiniRep.classList.add("hidden");
+});
+
+advanceMiniRep.addEventListener("click", () => {
+  if (currentSong > music.length - 1 || currentSong == music.length - 1) {
+    return;
+  } else {
+    currentSong++;
+    updateMusicMiniRep();
+
+    musicIcon.style.backgroundImage = `url(${music[currentSong].icon})`;
+    musicAudio.src = music[currentSong].src;
+  }
+});
+
+backMiniRep.addEventListener("click", () => {
+  if (currentSong == music.length - 1) {
+    currentSong--;
+    updateMusicMiniRep();
+
+    musicIcon.style.backgroundImage = `url(${music[currentSong].icon})`;
+    musicAudio.src = music[currentSong].src;
+  }
+});
+
+// ------------------------------------------------------------
+console.log(Notification.requestPermission(NavigationPrecommitController));
 
 let startButton = document.getElementById("Start");
 let intervalClock = null;
@@ -118,7 +208,30 @@ let overlay = document.getElementById("mainOverlay");
 let themeSelector = document.querySelectorAll(".configNav #themeSelect");
 let clockMainDiv = document.querySelector(".clockMainDiv");
 
+let miniPlayer = document.getElementById("miniPlayer");
+
 let objectSelected;
+
+// Mini reproductor --------------------------------
+
+let pipWindow;
+let player = document.getElementById("clock");
+
+miniPlayer.addEventListener("click", async () => {
+  if (pipWindow && !pipWindow.closed) {
+    pipWindow.close();
+    return;
+  }
+
+  pipWindow = await documentPictureInPicture.requestWindow({
+    width: 320,
+    height: 180,
+  });
+
+  pipWindow.document.body.appendChild(player);
+});
+
+// ----------------------------------------------------
 
 loginButton.addEventListener("click", () => {
   overlay.classList.remove("hidden");
@@ -176,11 +289,11 @@ function advanceOnClock() {
   if (objectSelected.title === "Flow" && clocks.flow.lap == 1) {
     adjustSelectedClock("shortPause");
     clocks.flow.lap = 2;
-  } else if (objectSelected.title === "Corto") {
+  } else if (objectSelected.title === "Pomodoro") {
     adjustSelectedClock("flow");
-  } else if (objectSelected.title === "Flow" && clocks.flow.lap == 2) {
+  } else if (objectSelected.title === "Short Break" && clocks.flow.lap == 2) {
     adjustSelectedClock("longPause");
-  } else if (objectSelected.title === "Largo") {
+  } else if (objectSelected.title === "Long Break") {
     adjustSelectedClock("flow");
     clocks.flow.lap = 1;
   }
@@ -189,7 +302,9 @@ function advanceOnClock() {
   return whatClockIsSelected();
 }
 
-let mainBody = document.getElementById("mainBody");
+let blobFlow = document.getElementById("blobFlow");
+let blobShort = document.getElementById("blobShort");
+let blobLong = document.getElementById("blobLong");
 
 function getTotalTime() {
   let allClocks = [clocks.flow, clocks.shortPause, clocks.longPause];
@@ -249,6 +364,15 @@ startButton.addEventListener("click", () => {
     (objectSelected.minutes <= 0 && objectSelected.seconds <= 0)
   )
     return;
+
+  if (objectSelected.title === "Pomodoro") {
+    blobFlow.classList.add("blobActive");
+  } else if (objectSelected.title === "Short Break") {
+    blobShort.classList.add("blobActive");
+  } else if (objectSelected.title === "Long Break") {
+    blobLong.classList.add("blobActive");
+  }
+
   startButton.classList.add("hidden");
   stopButton.classList.remove("hidden");
   objectSelected.isActive = true;
@@ -295,9 +419,19 @@ startButton.addEventListener("click", () => {
 let stopButton = document.getElementById("Stop");
 
 function stopTimer() {
+  let objectSelected = whatClockIsSelected();
+
   stopButton.classList.add("hidden");
   startButton.classList.remove("hidden");
-  let objectSelected = whatClockIsSelected();
+
+  if (objectSelected.title === "Pomodoro") {
+    blobFlow.classList.remove("blobActive");
+  } else if (objectSelected.title === "Short Break") {
+    blobShort.classList.remove("blobActive");
+  } else if (objectSelected.title === "Long Break") {
+    blobLong.classList.remove("blobActive");
+  }
+
   clearInterval(intervalClock);
   intervalClock = null;
   objectSelected.isActive = false;
@@ -335,6 +469,7 @@ let shortButton = document.getElementById("blobShort");
 let longButton = document.getElementById("blobLong");
 
 flowButton.addEventListener("click", () => {
+  stopTimer();
   flowButton.classList.add("blobSelected");
   shortButton.classList.remove("blobSelected");
   longButton.classList.remove("blobSelected");
@@ -352,6 +487,7 @@ flowButton.addEventListener("click", () => {
 });
 
 shortButton.addEventListener("click", () => {
+  stopTimer();
   flowButton.classList.remove("blobSelected");
   shortButton.classList.add("blobSelected");
   longButton.classList.remove("blobSelected");
@@ -369,6 +505,7 @@ shortButton.addEventListener("click", () => {
 });
 
 longButton.addEventListener("click", () => {
+  stopTimer();
   flowButton.classList.remove("blobSelected");
   shortButton.classList.remove("blobSelected");
   longButton.classList.add("blobSelected");

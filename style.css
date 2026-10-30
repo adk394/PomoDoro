@@ -87,13 +87,14 @@ input {
   border-radius: 0.5rem;
 }
 
-button {
-  z-index: 9999;
-}
-
 button:hover {
   transition: 150ms;
   border-radius: 0.5rem;
+}
+
+.musicFunctionBtn {
+  background-color: rgba(228, 228, 228, 0);
+  border: 0px;
 }
 
 .menuButton {
@@ -195,7 +196,7 @@ button:hover {
   position: absolute;
   box-shadow: 0 8px 24px 0 rgba(255, 255, 255, 0.05);
   border: 1px rgba(255, 255, 255, 0.904) solid;
-  background-color: rgba(255, 255, 255, 0.75) ;
+  background-color: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(2px);
   display: none;
   padding-bottom: 0.5rem;
@@ -222,7 +223,6 @@ button:hover {
   display: block;
   position: absolute;
   padding: 0.5rem;
-
 }
 
 .blob {
@@ -230,8 +230,8 @@ button:hover {
   border-radius: 1rem;
   width: 1rem;
   height: 1rem;
-  background-color: rgba(85, 85, 85, 0.5);
-  border: 1px #ffffff7c solid;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 0px #ffffff7c solid;
 }
 
 .blob:hover {
@@ -240,7 +240,6 @@ button:hover {
   width: 1rem;
   height: 1rem;
   background-color: rgba(255, 255, 255, 0.25);
-  border: 1px #ffffff7c solid;
 }
 
 .blobSelected {
@@ -250,12 +249,19 @@ button:hover {
   background-color: #ffffff;
 }
 
+.blobActive {
+  transition: 150ms;
+  width: 2rem;
+  height: 1rem;
+  background-color: #ffffff;
+}
+
 .hidden {
   display: none !important;
 }
 
 .blurred {
-  filter: blur(2px);
+  filter: blur(10px);
   pointer-events: none;
   user-select: none;
 }
@@ -301,8 +307,104 @@ button:hover {
   gap: 0rem;
 }
 
+#audioRange {
+  display: flex;
+  flex-direction: column;
+}
+
+#functionsMusicBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2rem;
+  margin-top: 0.25rem;
+}
+
+#musicBar {
+  background-color: #171717b9;
+  width: 75%;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+  padding: 0.6rem;
+  border-radius: 1.5rem;
+}
+
+#openMusicBar {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  padding-right: 0.75rem;
+}
+
+#closeMusicBar {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  padding-left: 0.75rem;
+}
+
+#musicBarCompact {
+  background-color: #171717ad;
+  /* background: linear-gradient(to right, #171717); */
+  width: 20%;
+  display: flex;
+  justify-self: start;
+  align-self: center;
+  padding: 0.5rem;
+  margin-left: 3rem;
+  border-radius: 1.5rem;
+}
+
+#musicIconCompact {
+  border-radius: 1.15rem;
+  width: 1.5%;
+  padding: 1.5rem;
+  background-color: rgb(228, 228, 228);
+}
+
+#musicTitle {
+  font-size: 0.75rem;
+}
+#musicSubtitle {
+  font-size: 0.65rem;
+}
+
+#textDivMusic {
+  flex-direction: row;
+  text-align: left;
+}
+
+#insideMusicBar {
+  padding-left: 0.5rem;
+  width: 100%;
+}
+
+#musicIcon {
+  border-radius: 1.15rem;
+  width: 1.5%;
+  padding: 1.5rem;
+  background-color: rgb(228, 228, 228);
+  background-image: url(/items/music/icons/jazz.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#functionBar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#functionPart {
+  width: 100%;
+}
+
 #menuSoftTitle {
-  cursor:auto;
+  cursor: auto;
   font-family: "SFPro";
   margin-bottom: 0.25rem;
   display: flex;
@@ -417,13 +519,10 @@ button:hover {
   border-radius: 0.5rem;
 }
 
+blobLong,
+#blobShort,
 #blobFlow {
-}
-
-#blobShort {
-}
-
-#blobLong {
+  
 }
 
 #clockTitle {
@@ -433,24 +532,17 @@ button:hover {
   font-weight: 500;
 }
 
+#Stop,
 #Start {
   background-color: rgba(255, 255, 255, 0);
   border: 0px;
-}
-
-#Stop {
-  background-color: rgba(255, 255, 255, 0);
-  border: 0px;
-}
-
-#Start:hover {
   circle {
     transition: 200ms;
-    fill-opacity: 0.65;
   }
 }
 
-#Stop:hover {
+#Stop:hover,
+#Start:hover {
   circle {
     transition: 200ms;
     fill-opacity: 0.65;
