@@ -14,6 +14,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "SFPro Rounded";
+  src: url("./items/fonts/sf-pro-display/SF-Pro-Rounded-Regular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 ::selection {
   background-color: #b4b4b49f; /* color del resaltado */
   color: #050505; /* color del texto seleccionado */
@@ -135,6 +143,7 @@ button:hover {
   padding: 1rem;
   padding-bottom: 2rem;
   width: 50%;
+  font-family: "SFPro";
   font-size: 8rem;
   display: flex;
   text-align: center;
@@ -307,6 +316,25 @@ button:hover {
   gap: 0rem;
 }
 
+.musicBarCompact {
+  transition: 500ms;
+  background-color: #171717ad;
+  justify-self: start !important;
+  width: 20% !important;
+  display: flex;
+  align-self: center;
+  padding: 0.5rem;
+  margin-left: 3rem;
+  border-radius: 1.5rem;
+}
+
+.musicIconCompact {
+  border-radius: 1.15rem;
+  width: 1.5%;
+  padding: 1.5rem;
+  background-color: rgb(228, 228, 228);
+}
+
 #audioRange {
   display: flex;
   flex-direction: column;
@@ -321,14 +349,31 @@ button:hover {
 }
 
 #musicBar {
+  transition: 500ms;
   background-color: #171717b9;
   width: 75%;
   display: flex;
-  justify-self: center;
-  align-self: center;
-  justify-content: center;
   padding: 0.6rem;
   border-radius: 1.5rem;
+  justify-self: center;
+}
+
+#musicListBar {
+  transition: 200ms;
+  gap: 1rem;
+  background-color: #171717b9;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  border-radius: 1.5rem;
+  justify-self: center;
+}
+
+#musicListBar:hover {
+  transition: 200ms;
+  background: linear-gradient(to right,#171717,#3d3d3d );
+  
 }
 
 #openMusicBar {
@@ -338,30 +383,11 @@ button:hover {
   padding-right: 0.75rem;
 }
 
-#closeMusicBar {
+.closeMusicBar {
   display: flex;
   align-self: center;
   justify-self: center;
   padding-left: 0.75rem;
-}
-
-#musicBarCompact {
-  background-color: #171717ad;
-  /* background: linear-gradient(to right, #171717); */
-  width: 20%;
-  display: flex;
-  justify-self: start;
-  align-self: center;
-  padding: 0.5rem;
-  margin-left: 3rem;
-  border-radius: 1.5rem;
-}
-
-#musicIconCompact {
-  border-radius: 1.15rem;
-  width: 1.5%;
-  padding: 1.5rem;
-  background-color: rgb(228, 228, 228);
 }
 
 #musicTitle {
@@ -369,6 +395,14 @@ button:hover {
 }
 #musicSubtitle {
   font-size: 0.65rem;
+}
+
+
+#musicListTitle {
+  font-size: 0.9rem;
+}
+#musicListSubtitle {
+  font-size: 0.75rem;
 }
 
 #textDivMusic {
@@ -385,6 +419,16 @@ button:hover {
   border-radius: 1.15rem;
   width: 1.5%;
   padding: 1.5rem;
+  background-color: rgb(228, 228, 228);
+  background-image: url(/items/music/icons/jazz.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#musicListIcon {
+   border-radius: 1.15rem;
+  padding: 2.1rem;
   background-color: rgb(228, 228, 228);
   background-image: url(/items/music/icons/jazz.png);
   background-size: cover;
@@ -431,7 +475,32 @@ button:hover {
   padding: 3rem;
 }
 
+#musicListOverlay {
+  background-color: #050505;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  border: 1px #3d3d3d solid;
+  color: white;
+  background-color: #171717;
+  border-radius: 3rem;
+  padding: 3rem;
+}
+
 #closeOverlay {
+  display: flex;
+  justify-self: end;
+  transition: 300ms;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 1rem;
+  border: 0px;
+  padding: 0.25rem;
+}
+
+#closeMusicListOverlay {
   display: flex;
   justify-self: end;
   transition: 300ms;
@@ -481,6 +550,10 @@ button:hover {
   border-radius: 0.5rem;
 }
 
+#songsList {
+  width: 100%;
+}
+
 #minShort {
   padding-bottom: 0.25rem;
   display: flex;
@@ -522,7 +595,6 @@ button:hover {
 blobLong,
 #blobShort,
 #blobFlow {
-  
 }
 
 #clockTitle {

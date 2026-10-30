@@ -5,13 +5,43 @@ let music = [
     title: "Jazz Song",
     artist: "Anon",
     src: "/items/music/jazz.mp3",
-    icon: "/items/music/icons/jazz.png",
+    icon: "/items/music/icons/white.png",
   },
   {
     title: "Minecraft - Minecraft Volume Alpha",
     artist: "C418",
     src: "/items/music/minecraft1.mp3",
-    icon: "/items/music/icons/minecraft1.png",
+    icon: "/items/music/icons/red.png",
+  },
+  {
+    title: "Skinny Song",
+    artist: "Anon",
+    src: "/items/music/jazz.mp3",
+    icon: "/items/music/icons/peomona.png",
+  },
+  {
+    title: "Ourense",
+    artist: "C418",
+    src: "/items/music/minecraft1.mp3",
+    icon: "/items/music/icons/pino.png",
+  },
+  {
+    title: "Pip Pip",
+    artist: "Anon",
+    src: "/items/music/jazz.mp3",
+    icon: "/items/music/icons/menta.png",
+  },
+  {
+    title: "Vigo Carlos",
+    artist: "C418",
+    src: "/items/music/minecraft1.mp3",
+    icon: "/items/music/icons/marino.png",
+  },
+   {
+    title: "Marino Carlos",
+    artist: "C418",
+    src: "/items/music/minecraft1.mp3",
+    icon: "/items/music/icons/mar.png",
   },
 ];
 
@@ -32,8 +62,8 @@ let clocks = {
   },
   shortPause: {
     title: "Short Break",
-    minutes: "05",
-    seconds: "00",
+    minutes: "00",
+    seconds: "02",
     isSelected: false,
     isActive: false,
   },
@@ -135,8 +165,6 @@ let currentSong = 0;
 let musicTitle = document.getElementById("musicTitle");
 let musicSubtitle = document.getElementById("musicSubtitle");
 
-updateMusicMiniRep();
-
 audioRange.addEventListener("input", () => {
   musicAudio.volume = audioRange.value;
 
@@ -149,6 +177,8 @@ function updateMusicMiniRep() {
   musicTitle.innerHTML = music[currentSong].title;
   musicSubtitle.innerHTML = music[currentSong].artist;
 }
+
+updateMusicMiniRep();
 
 volumeMiniRep.addEventListener("click", () => {
   audioRange.classList.toggle("hidden");
@@ -169,11 +199,12 @@ stopMiniRep.addEventListener("click", () => {
 });
 
 advanceMiniRep.addEventListener("click", () => {
-  if (currentSong > music.length - 1 || currentSong == music.length - 1) {
+  if (currentSong == music.length - 1 || currentSong < 0) {
     return;
   } else {
     currentSong++;
     updateMusicMiniRep();
+    console.log(currentSong);
 
     musicIcon.style.backgroundImage = `url(${music[currentSong].icon})`;
     musicAudio.src = music[currentSong].src;
@@ -181,38 +212,23 @@ advanceMiniRep.addEventListener("click", () => {
 });
 
 backMiniRep.addEventListener("click", () => {
-  if (currentSong == music.length - 1) {
+  if (currentSong !== music.length - 1 || currentSong !== 0) {
     currentSong--;
+    if (currentSong < 0) {
+      currentSong = 0;
+    }
     updateMusicMiniRep();
-
+    console.log(currentSong);
     musicIcon.style.backgroundImage = `url(${music[currentSong].icon})`;
     musicAudio.src = music[currentSong].src;
   }
 });
 
 // ------------------------------------------------------------
-console.log(Notification.requestPermission(NavigationPrecommitController));
-
-let startButton = document.getElementById("Start");
-let intervalClock = null;
-let buttonMenu = document.querySelectorAll(".configNav button");
-
-let endClockMinutes = document.getElementById("endMin");
-let endClockHours = document.getElementById("endHours");
-
-let loginButton = document.getElementById("loginButton");
-
-let closeOverlay = document.getElementById("closeOverlay");
-let overlay = document.getElementById("mainOverlay");
-
-let themeSelector = document.querySelectorAll(".configNav #themeSelect");
-let clockMainDiv = document.querySelector(".clockMainDiv");
-
-let miniPlayer = document.getElementById("miniPlayer");
-
-let objectSelected;
 
 // Mini reproductor --------------------------------
+
+let miniPlayer = document.getElementById("miniPlayer");
 
 let pipWindow;
 let player = document.getElementById("clock");
@@ -233,9 +249,68 @@ miniPlayer.addEventListener("click", async () => {
 
 // ----------------------------------------------------
 
+Notification.requestPermission(NavigationPrecommitController);
+
+let startButton = document.getElementById("Start");
+let intervalClock = null;
+let buttonMenu = document.querySelectorAll(".configNav button");
+
+let endClockMinutes = document.getElementById("endMin");
+let endClockHours = document.getElementById("endHours");
+
+let loginButton = document.getElementById("loginButton");
+
+let closeOverlay = document.getElementById("closeOverlay");
+let closeMusicListOverlay = document.getElementById("closeMusicListOverlay");
+let overlay = document.getElementById("mainOverlay");
+
+let themeSelector = document.querySelectorAll(".configNav #themeSelect");
+let clockMainDiv = document.querySelector(".clockMainDiv");
+
+let openMusicBar = document.getElementById("openMusicBar");
+let insideMusicBar = document.getElementById("insideMusicBar");
+let musicBar = document.getElementById("musicBar");
+
+let musicListOverlay = document.getElementById("musicListOverlay");
+let listMiniRep = document.getElementById("listMiniRep");
+let songsList = document.getElementById("songsList");
+
+let objectSelected;
+
+function renderPlaylist() {
+  music.forEach((song) => {
+    songsList.innerHTML += `
+    <div id="musicListBar"> 
+      <div id="musicListIcon" style="background-image: url(${song.icon});">  </div>
+      <div id="textDivMusic">
+        <p id="musicListTitle"> ${song.title} </p> 
+        <p id="musicListSubtitle"> ${song.artist} </p> 
+      </div>
+    </div>`;
+  });
+}
+renderPlaylist();
+
+listMiniRep.addEventListener("click", () => {
+  musicListOverlay.classList.toggle("hidden");
+  clockMainDiv.classList.add("blurred");
+});
+
+openMusicBar.addEventListener("click", () => {
+  insideMusicBar.classList.toggle("hidden");
+  musicBar.classList.toggle("musicBarCompact");
+  musicIcon.classList.toggle("musicIconCompact");
+  openMusicBar.classList.toggle("closeMusicBar");
+});
+
 loginButton.addEventListener("click", () => {
   overlay.classList.remove("hidden");
   clockMainDiv.classList.add("blurred");
+});
+
+closeMusicListOverlay.addEventListener("click", () => {
+  musicListOverlay.classList.toggle("hidden");
+  clockMainDiv.classList.remove("blurred");
 });
 
 closeOverlay.addEventListener("click", () => {
@@ -321,8 +396,12 @@ function getTotalTime() {
   return sumAllTime;
 }
 
+let musicRingTone = document.getElementById("musicRingTone")
+
 startButton.addEventListener("click", () => {
   let objectSelected = whatClockIsSelected();
+
+  document.title = `Essy | ${objectSelected.title}`;
   let sumAllTime = getTotalTime();
   let currentTime = new Date();
   let currentMinutes = currentTime.getMinutes();
@@ -379,6 +458,7 @@ startButton.addEventListener("click", () => {
   intervalClock = setInterval(() => {
     let seconds = Number(times.seconds.innerHTML);
     let minutes = Number(times.minutes.innerHTML);
+
     times.seconds.innerHTML = seconds - 1;
 
     if (seconds <= 0) {
@@ -393,8 +473,12 @@ startButton.addEventListener("click", () => {
       times.minutes.innerHTML = times.minutes.innerHTML.padStart(2, "0");
     }
 
+    document.title = `Essy | ${objectSelected.title} ${times.minutes.innerHTML}:${times.seconds.innerHTML}`;
+
     if (times.seconds.innerHTML == 0 && times.minutes.innerHTML == 0) {
+      musicRingTone.play()
       clearInterval(intervalClock);
+      musicAudio.play();
       intervalClock = null;
       objectSelected.isActive = false;
 
@@ -420,7 +504,7 @@ let stopButton = document.getElementById("Stop");
 
 function stopTimer() {
   let objectSelected = whatClockIsSelected();
-
+  document.title = `Essy`
   stopButton.classList.add("hidden");
   startButton.classList.remove("hidden");
 
