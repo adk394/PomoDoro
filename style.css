@@ -33,6 +33,7 @@ a {
 
 p {
   margin: 0rem;
+  font-variant-numeric: tabular-nums;
 }
 
 option {
@@ -85,14 +86,6 @@ li {
   cursor: pointer;
   font-family: "SFPro";
   font-size: 1rem;
-}
-
-input {
-  background-color: rgba(255, 255, 255, 0);
-  padding: 0.5rem;
-  color: white;
-  border: 1px white solid;
-  border-radius: 0.5rem;
 }
 
 button:hover {
@@ -312,7 +305,10 @@ button:hover {
   font-family: "SFPro";
   width: 45%;
   border-radius: 2rem;
-  padding: 0rem;
+
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+
   gap: 0rem;
 }
 
@@ -326,13 +322,6 @@ button:hover {
   padding: 0.5rem;
   margin-left: 3rem;
   border-radius: 1.5rem;
-}
-
-.musicIconCompact {
-  border-radius: 1.15rem;
-  width: 1.5%;
-  padding: 1.5rem;
-  background-color: rgb(228, 228, 228);
 }
 
 #audioRange {
@@ -355,7 +344,8 @@ button:hover {
   display: flex;
   padding: 0.6rem;
   border-radius: 1.5rem;
-  justify-self: center;
+  justify-self: start;
+  margin-left: 3rem;
 }
 
 #musicListBar {
@@ -372,8 +362,7 @@ button:hover {
 
 #musicListBar:hover {
   transition: 200ms;
-  background: linear-gradient(to right,#171717,#3d3d3d );
-  
+  background: linear-gradient(to right, #171717, #3d3d3d);
 }
 
 #openMusicBar {
@@ -383,20 +372,12 @@ button:hover {
   padding-right: 0.75rem;
 }
 
-.closeMusicBar {
-  display: flex;
-  align-self: center;
-  justify-self: center;
-  padding-left: 0.75rem;
-}
-
 #musicTitle {
   font-size: 0.75rem;
 }
 #musicSubtitle {
   font-size: 0.65rem;
 }
-
 
 #musicListTitle {
   font-size: 0.9rem;
@@ -415,9 +396,13 @@ button:hover {
   width: 100%;
 }
 
+.musicIconCompact {
+  border-radius: 1.15rem;
+  background-color: rgb(228, 228, 228);
+}
+
 #musicIcon {
   border-radius: 1.15rem;
-  width: 1.5%;
   padding: 1.5rem;
   background-color: rgb(228, 228, 228);
   background-image: url(/items/music/icons/jazz.png);
@@ -427,7 +412,7 @@ button:hover {
 }
 
 #musicListIcon {
-   border-radius: 1.15rem;
+  border-radius: 1.15rem;
   padding: 2.1rem;
   background-color: rgb(228, 228, 228);
   background-image: url(/items/music/icons/jazz.png);
@@ -460,19 +445,6 @@ button:hover {
   transition: 150ms;
   background-color: #ffffff00;
   color: rgb(32, 32, 32);
-}
-
-#mainOverlay {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 25%;
-  border: 2px white solid;
-  color: white;
-  background-color: #171717;
-  border-radius: 1rem;
-  padding: 3rem;
 }
 
 #musicListOverlay {
@@ -508,14 +480,6 @@ button:hover {
   border-radius: 1rem;
   border: 0px;
   padding: 0.25rem;
-}
-
-#buttonOverlaySection {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 2rem;
-  gap: 1rem;
 }
 
 #closeOverlay:hover {
@@ -599,7 +563,7 @@ blobLong,
 
 #clockTitle {
   font-family: "SFPro";
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin: 0rem;
   font-weight: 500;
 }
@@ -629,3 +593,80 @@ blobLong,
   border: none;
   border-radius: 1rem;
 }
+
+/* Register / Login */
+
+.closeMusicBar {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  padding-left: 0.75rem;
+}
+
+#mainOverlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  border: 2px #b4b4b4 solid;
+  color: white;
+  background-color: #171717;
+  border-radius: 4rem;
+  padding: 2rem;
+}
+
+#textLoginCamps {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+#password,
+#email {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.logregText {
+  font-size: 1.25rem;
+}
+
+#continueButton {
+  background: linear-gradient(to right, #d8645d, #de4769);
+  border-radius: 0.75rem;
+  width: 111%;
+  border: 0px;
+  padding: 0.75rem;
+}
+
+#continueButton:hover {
+  background: linear-gradient(to right, #ce736e, #cc637b);
+  border-radius: 2rem;
+  color: white;
+}
+
+#buttonOverlaySection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  gap: 1rem;
+}
+
+input {
+  background-color: rgba(255, 255, 255, 0);
+  padding: 0.5rem;
+  color: white;
+  border: 1px #bcbcbc solid;
+  border-radius: 0.5rem;
+}
+
+#titlelogreg {
+  font-size: 1.5rem;
+}
+
+/* ----------------- */

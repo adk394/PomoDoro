@@ -37,7 +37,7 @@ let music = [
     src: "/items/music/minecraft1.mp3",
     icon: "/items/music/icons/marino.png",
   },
-   {
+  {
     title: "Marino Carlos",
     artist: "C418",
     src: "/items/music/minecraft1.mp3",
@@ -62,8 +62,8 @@ let clocks = {
   },
   shortPause: {
     title: "Short Break",
-    minutes: "00",
-    seconds: "02",
+    minutes: "05",
+    seconds: "00",
     isSelected: false,
     isActive: false,
   },
@@ -82,8 +82,11 @@ const authForm = document.getElementById("authForm");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const btnRegistro = document.getElementById("btnRegister");
+let messageError = document.getElementById("messageError")
 
-async function probarSupabase() {
+// GUARDAR: de clocks -> base de datos
+async function guardarRelojes() {
+  console.log("guardando datos");
   const {
     data: { user },
     error,
@@ -105,9 +108,7 @@ async function probarSupabase() {
       long_seconds: Number(clocks.longPause.seconds),
       updated_at: new Date().toISOString(),
     },
-    {
-      onConflict: "user_id",
-    },
+    { onConflict: "user_id" },
   );
 
   if (errorGuardar) {
@@ -118,6 +119,44 @@ async function probarSupabase() {
   console.log("¡Tiempos guardados correctamente!");
 }
 
+// CARGAR: de base de datos -> clocks
+async function cargarRelojes() {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return;
+
+  const { data, error } = await supabase
+    .from("clocks")
+    .select("*")
+    .maybeSingle();
+
+  if (error) {
+    console.log("Error al cargar:", error.message);
+    return;
+  }
+  if (!data) return; // usuario nuevo: aún sin fila
+
+  const tipos = {
+    flow: "flow",
+    shortPause: "short",
+    longPause: "long",
+  };
+
+  for (const [claveObjeto, prefijo] of Object.entries(tipos)) {
+    clocks[claveObjeto].minutes = String(data[`${prefijo}_minutes`]).padStart(
+      2,
+      "0",
+    );
+    clocks[claveObjeto].seconds = String(data[`${prefijo}_seconds`]).padStart(
+      2,
+      "0",
+    );
+  }
+}
+
+cargarRelojes(); // al abrir la app: LEER, nunca guardar
+
 // Register
 
 btnRegistro.addEventListener("click", async () => {
@@ -125,7 +164,7 @@ btnRegistro.addEventListener("click", async () => {
     email: emailInput.value,
     password: passwordInput.value,
   });
-  console.log("Registro:", data, error);
+  messageError.innerHTML = ("Registro:", data, error);
 });
 
 // Login
@@ -137,12 +176,33 @@ authForm.addEventListener("submit", async (e) => {
     password: passwordInput.value,
   });
   if (error) {
-    console.log("Error al entrar:", error.message);
+    messageError.innerHTML = ("Error al entrar:", error.message);
     return;
   }
-  console.log("Login correcto:", data, error);
-  await probarSupabase();
+  messageError.innerHTML = ("Login correcto:", data, error);
+  await guardarRelojes();
 });
+
+const {
+  data: { session },
+} = await supabase.auth.getSession();
+
+if (session) {
+  messageError.innerHTML = ("Logueado como:", session.user.email);
+} else {
+  messageError.innerHTML = ("No hay sesión");
+}
+
+async function startApp() {
+  await cargarRelojes();
+
+  let firstUpdate = whatClockIsSelected();
+  console.log(firstUpdate);
+  times.seconds.innerHTML = firstUpdate.seconds;
+  times.minutes.innerHTML = firstUpdate.minutes;
+}
+
+startApp()
 
 // ------------------------------------------------------------
 
@@ -242,9 +302,15 @@ miniPlayer.addEventListener("click", async () => {
   pipWindow = await documentPictureInPicture.requestWindow({
     width: 320,
     height: 180,
-  });
+  }); 
 
+  const marcador = document.createComment("reloj")
+  player.before(marcador)
   pipWindow.document.body.appendChild(player);
+
+  phpWindoww.addEventListener("pagehide", () => {
+    marcador.replaceWith(player)
+  })
 });
 
 // ----------------------------------------------------
@@ -271,9 +337,13 @@ let openMusicBar = document.getElementById("openMusicBar");
 let insideMusicBar = document.getElementById("insideMusicBar");
 let musicBar = document.getElementById("musicBar");
 
+let svgOpenBar = document.getElementById("svgOpenBar")
+let svgCloseBar = document.getElementById("svgCloseBar")
+
 let musicListOverlay = document.getElementById("musicListOverlay");
 let listMiniRep = document.getElementById("listMiniRep");
 let songsList = document.getElementById("songsList");
+
 
 let objectSelected;
 
@@ -297,6 +367,9 @@ listMiniRep.addEventListener("click", () => {
 });
 
 openMusicBar.addEventListener("click", () => {
+  svgCloseBar.classList.toggle("hidden")
+  svgOpenBar.classList.toggle("hidden")
+
   insideMusicBar.classList.toggle("hidden");
   musicBar.classList.toggle("musicBarCompact");
   musicIcon.classList.toggle("musicIconCompact");
@@ -348,12 +421,13 @@ buttonMenu.forEach((button) => {
 
 let resetButton = document.getElementById("resetButton");
 
-resetButton.addEventListener("click", () => {
+resetButton.addEventListener("click", async () => {
   objectSelected = whatClockIsSelected();
   objectSelected.seconds = "00";
   objectSelected.minutes = "00";
   times.seconds.innerHTML = objectSelected.seconds;
   times.minutes.innerHTML = objectSelected.minutes;
+  await guardarRelojes();
   stopTimer();
 });
 
@@ -396,7 +470,7 @@ function getTotalTime() {
   return sumAllTime;
 }
 
-let musicRingTone = document.getElementById("musicRingTone")
+let musicRingTone = document.getElementById("musicRingTone");
 
 startButton.addEventListener("click", () => {
   let objectSelected = whatClockIsSelected();
@@ -424,8 +498,6 @@ startButton.addEventListener("click", () => {
   if (currentHours === 24) {
     currentHours = 0;
   }
-
-  // Hay un bug que no se pueden sumar mas de 1 hora
 
   endClockMinutes.innerHTML = endMinutes;
   endClockHours.innerHTML = currentHours;
@@ -476,7 +548,7 @@ startButton.addEventListener("click", () => {
     document.title = `Essy | ${objectSelected.title} ${times.minutes.innerHTML}:${times.seconds.innerHTML}`;
 
     if (times.seconds.innerHTML == 0 && times.minutes.innerHTML == 0) {
-      musicRingTone.play()
+      musicRingTone.play();
       clearInterval(intervalClock);
       musicAudio.play();
       intervalClock = null;
@@ -504,7 +576,7 @@ let stopButton = document.getElementById("Stop");
 
 function stopTimer() {
   let objectSelected = whatClockIsSelected();
-  document.title = `Essy`
+  document.title = `Essy`;
   stopButton.classList.add("hidden");
   startButton.classList.remove("hidden");
 
@@ -631,8 +703,10 @@ let minsShort = document.querySelectorAll(".configNav #minShort");
 let minsLong = document.querySelectorAll(".configNav #minLong");
 
 minsFlow.forEach((minFlow) => {
-  minFlow.addEventListener("click", () => {
+  minFlow.addEventListener("click", async () => {
     clocks.flow.minutes = minFlow.value;
+    await guardarRelojes();
+
     if (clocks.flow.isSelected === true) {
       times.minutes.innerHTML = clocks.flow.minutes;
     }
@@ -641,8 +715,9 @@ minsFlow.forEach((minFlow) => {
 });
 
 minsShort.forEach((minShort) => {
-  minShort.addEventListener("click", () => {
+  minShort.addEventListener("click", async () => {
     clocks.shortPause.minutes = minShort.value;
+    await guardarRelojes();
 
     if (clocks.shortPause.isSelected === true) {
       times.minutes.innerHTML = clocks.shortPause.minutes;

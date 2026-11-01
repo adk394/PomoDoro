@@ -104,6 +104,7 @@
                     width: 0.75rem;
                     height: 0.75rem;
                     border-radius: 1rem;
+                    border: 2px rgb(71, 71, 71) solid;
                   "
                 ></div>
               </button>
@@ -119,6 +120,7 @@
                     width: 0.75rem;
                     height: 0.75rem;
                     border-radius: 1rem;
+                    border: 2px rgb(71, 71, 71) solid;
                   "
                 ></div>
               </button>
@@ -130,10 +132,11 @@
                 Hive
                 <div
                   style="
-                    background: linear-gradient(#ccb42f, #6e684c);
+                    background: linear-gradient(#6e684c, #ccb42f);
                     width: 0.75rem;
                     height: 0.75rem;
                     border-radius: 1rem;
+                    border: 2px rgb(71, 71, 71) solid;
                   "
                 ></div>
               </button>
@@ -149,6 +152,7 @@
                     width: 0.75rem;
                     height: 0.75rem;
                     border-radius: 1rem;
+                    border: 2px rgb(71, 71, 71) solid;
                   "
                 ></div>
               </button>
@@ -169,6 +173,7 @@
                     width: 0.75rem;
                     height: 0.75rem;
                     border-radius: 1rem;
+                    border: 2px rgb(71, 71, 71) solid;
                   "
                 ></div>
               </button>
@@ -184,6 +189,7 @@
                     width: 0.75rem;
                     height: 0.75rem;
                     border-radius: 1rem;
+                    border: 2px rgb(71, 71, 71) solid;
                   "
                 ></div>
               </button>
@@ -195,10 +201,11 @@
                 Burton
                 <div
                   style="
-                    background: linear-gradient(#b3b3b3, #3f3f3f);
+                    background: linear-gradient(#3f3f3f, #b3b3b3);
                     width: 0.75rem;
                     height: 0.75rem;
                     border-radius: 1rem;
+                    border: 2px rgb(71, 71, 71) solid;
                   "
                 ></div>
               </button>
@@ -329,9 +336,9 @@
 
       <div id="functionBar">
         <div id="functionPart">
-          <div id="musicBar">
-            <div id="musicIcon" ></div>
-            <div id="insideMusicBar" class="">
+          <div id="musicBar" class="musicBarCompact">
+            <div id="musicIcon" class="musicIconCompact"></div>
+            <div id="insideMusicBar" class="hidden">
               <div id="textDivMusic">
                 <p id="musicTitle"></p>
                 <p id="musicSubtitle"></p>
@@ -437,8 +444,10 @@
                 />
               </div>
             </div>
-            <div id="openMusicBar">
+            <div id="openMusicBar" class="closeMusicBar">
               <svg
+                id="svgOpenBar"
+                class="hidden"
                 width="9"
                 height="17"
                 viewBox="0 0 9 17"
@@ -450,10 +459,9 @@
                   fill="white"
                 />
               </svg>
-            </div>
-          </div>
-          <!-- <div id="musicBarCompact">
               <svg
+                id="svgCloseBar"
+                class=""
                 width="9"
                 height="17"
                 viewBox="0 0 9 17"
@@ -465,6 +473,10 @@
                   fill="#D9D9D9"
                 />
               </svg>
+            </div>
+          </div>
+          <!-- <div id="musicBarCompact">
+             
                -->
         </div>
         <div class="switchState">
@@ -519,23 +531,173 @@
             />
           </svg>
         </button>
-        <h1>Inicia sesion</h1>
-        <div>
-          <p>Correo electronico</p>
-          <input type="email" id="email" placeholder="Correo" required />
-          <p>Contraseña</p>
+        <svg
+          width="64"
+          height="62"
+          viewBox="0 0 64 62"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M64 31.2296C64 48.9699 58.2857 56.6592 42.2857 60.6744C22.4762 65.6456 0 48.9699 0 31.2296C1.14286 15.1687 1.52381 25.4935 32.381 6.5647C44.9524 15.9335 64 13.4892 64 31.2296Z"
+            fill="url(#paint0_linear_0_1)"
+          />
+          <path
+            d="M64 31.2296C64 48.9699 58.2857 56.6592 42.2857 60.6744C22.4762 65.6456 0 48.9699 0 31.2296C1.14286 15.1687 1.52381 25.4935 32.381 6.5647C44.9524 15.9335 64 13.4892 64 31.2296Z"
+            fill="url(#paint1_linear_0_1)"
+          />
+          <path
+            d="M5.03211 11.7167C6.82872 6.31157 13.4632 4.35371 17.9065 7.91741C22.5925 11.6757 21.7617 19.0349 16.3558 21.6539L4.37127 27.4599C3.1087 28.0716 1.58909 27.5512 0.966581 26.2939C0.667682 25.6902 0.619199 24.993 0.831674 24.3537L5.03211 11.7167Z"
+            fill="url(#paint2_linear_0_1)"
+          />
+          <path
+            d="M45.6668 6.16431C49.8524 4.18719 54.8548 5.57973 57.4167 9.4352L59.1244 12.0051C60.1663 13.5732 60.8523 15.3503 61.1341 17.2118L62.7719 28.0321C62.7953 28.1862 62.8333 28.3378 62.8856 28.4847C63.6553 30.6484 61.2819 32.5803 59.3195 31.3874L43.9926 22.0705C37.9937 18.4239 38.4586 9.56923 44.8063 6.57081L45.6668 6.16431Z"
+            fill="url(#paint3_linear_0_1)"
+          />
+          <path
+            d="M26.8679 3.35502C29.946 5.71444 33.7348 4.13856 36.8375 1.81156L37.5731 1.2599C40.3119 -0.794195 44.1899 -0.284582 46.305 2.40738L47.677 4.15365C52.1692 9.87094 47.9487 18.2327 40.681 18.0144L25.3676 17.5544C17.0573 17.3047 11.8644 7.50087 19.0833 3.37646C21.705 1.87855 24.4235 1.48129 26.8679 3.35502Z"
+            fill="url(#paint4_linear_0_1)"
+          />
+          <ellipse
+            cx="26.044"
+            cy="38.9237"
+            rx="9.26484"
+            ry="14.0296"
+            transform="rotate(0.481905 26.044 38.9237)"
+            fill="url(#paint5_linear_0_1)"
+          />
+          <path
+            d="M53.1407 41.3282C53.0309 46.9568 49.8616 51.4596 46.062 51.3854C42.2624 51.3112 39.2713 46.6882 39.3811 41.0596C39.491 35.431 42.6603 30.9283 46.4599 31.0025C50.2595 31.0766 53.2506 35.6996 53.1407 41.3282Z"
+            fill="url(#paint6_linear_0_1)"
+          />
+          <path
+            d="M22.7558 39.4964C24.204 39.8844 24.7262 41.6689 23.7156 42.7764L19.8545 47.0078C18.6529 48.3246 16.4592 47.5303 16.3791 45.7496L16.1395 40.4195C16.0788 39.0684 17.3487 38.0478 18.6551 38.3978L22.7558 39.4964Z"
+            fill="url(#paint7_linear_0_1)"
+          />
+          <path
+            d="M43.0164 41.8742C44.3686 42.4536 44.6535 44.2454 43.5479 45.2157L42.124 46.4653C40.8442 47.5885 38.8358 46.7007 38.8051 44.9982L38.7712 43.1239C38.745 41.6728 40.2246 40.6778 41.5587 41.2495L43.0164 41.8742Z"
+            fill="url(#paint8_linear_0_1)"
+          />
+          <circle cx="23" cy="47.5647" r="1" fill="white" />
+          <defs>
+            <linearGradient
+              id="paint0_linear_0_1"
+              x1="32"
+              y1="6.5647"
+              x2="32"
+              y2="61.5647"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0.399038" stop-color="white" />
+              <stop offset="1" stop-color="#E9E9E9" />
+            </linearGradient>
+            <linearGradient
+              id="paint1_linear_0_1"
+              x1="32"
+              y1="6.5647"
+              x2="32"
+              y2="61.5647"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="white" />
+              <stop offset="0.399038" stop-color="white" />
+              <stop offset="1" stop-color="#E9E9E9" />
+            </linearGradient>
+            <linearGradient
+              id="paint2_linear_0_1"
+              x1="14.4682"
+              y1="0.564697"
+              x2="14.4682"
+              y2="27.0768"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="white" />
+            </linearGradient>
+            <linearGradient
+              id="paint3_linear_0_1"
+              x1="57.1113"
+              y1="1.28019"
+              x2="50.2854"
+              y2="31.1375"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="white" />
+            </linearGradient>
+            <linearGradient
+              id="paint4_linear_0_1"
+              x1="36.1429"
+              y1="-14.4998"
+              x2="36.1429"
+              y2="18.5647"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="white" />
+            </linearGradient>
+            <linearGradient
+              id="paint5_linear_0_1"
+              x1="22.9825"
+              y1="26.1721"
+              x2="30.9487"
+              y2="51.8679"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop />
+              <stop offset="1" stop-color="#313131" />
+            </linearGradient>
+            <linearGradient
+              id="paint6_linear_0_1"
+              x1="44.6236"
+              y1="31.9642"
+              x2="48.7337"
+              y2="51.3225"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop />
+              <stop offset="1" stop-color="#2F2F2F" />
+            </linearGradient>
+            <linearGradient
+              id="paint7_linear_0_1"
+              x1="16.5669"
+              y1="37.8613"
+              x2="16.757"
+              y2="49.2678"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#FBFBFB" />
+              <stop offset="1" stop-color="#F4F4F4" />
+            </linearGradient>
+            <linearGradient
+              id="paint8_linear_0_1"
+              x1="39.6852"
+              y1="40.3133"
+              x2="39.111"
+              y2="48.2975"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#FAFAFA" />
+              <stop offset="1" stop-color="#F5F5F5" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <h1 id="titlelogreg">Sing in to your account</h1>
+        <div id="textLoginCamps">
+          <p class="logregText">Email</p>
           <input
-            type="password"
-            id="password"
-            placeholder="Contraseña"
+            type="email"
+            id="email"
+            placeholder="you@example.com"
             required
           />
+          <p class="logregText">Password</p>
+          <input type="password" id="password" placeholder="******" required />
         </div>
         <div id="buttonOverlaySection">
-          <button type="button" id="btnRegister" class="btnOverlay">
-            Registrarme
+          <button type="submit" id="continueButton" class="btnOverlay">
+            Continue
           </button>
-          <button type="submit" class="btnOverlay">Entrar</button>
+          <p id="messageError"></p>
+          <p>Dont have an account? <button id="btnRegister"> Sing Up </button></p>
         </div>
       </form>
     </div>
@@ -544,29 +706,30 @@
     <!-- Music List Overlay -->
 
     <div id="musicListOverlay" class="hidden">
-        <button id="closeMusicListOverlay">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M13.2806 7.28063L10.8103 9.75L13.2806 12.2194C13.3503 12.2891 13.4056 12.3718 13.4433 12.4628C13.481 12.5539 13.5004 12.6515 13.5004 12.75C13.5004 12.8485 13.481 12.9461 13.4433 13.0372C13.4056 13.1282 13.3503 13.2109 13.2806 13.2806C13.2109 13.3503 13.1282 13.4056 13.0372 13.4433C12.9461 13.481 12.8486 13.5004 12.75 13.5004C12.6515 13.5004 12.5539 13.481 12.4628 13.4433C12.3718 13.4056 12.2891 13.3503 12.2194 13.2806L9.75 10.8103L7.28063 13.2806C7.21095 13.3503 7.12822 13.4056 7.03718 13.4433C6.94613 13.481 6.84855 13.5004 6.75 13.5004C6.65146 13.5004 6.55388 13.481 6.46283 13.4433C6.37179 13.4056 6.28906 13.3503 6.21938 13.2806C6.1497 13.2109 6.09442 13.1282 6.05671 13.0372C6.019 12.9461 5.99959 12.8485 5.99959 12.75C5.99959 12.6515 6.019 12.5539 6.05671 12.4628C6.09442 12.3718 6.1497 12.2891 6.21938 12.2194L8.68969 9.75L6.21938 7.28063C6.07865 7.13989 5.99959 6.94902 5.99959 6.75C5.99959 6.55098 6.07865 6.36011 6.21938 6.21937C6.36011 6.07864 6.55098 5.99958 6.75 5.99958C6.94903 5.99958 7.1399 6.07864 7.28063 6.21937L9.75 8.68969L12.2194 6.21937C12.2891 6.14969 12.3718 6.09442 12.4628 6.0567C12.5539 6.01899 12.6515 5.99958 12.75 5.99958C12.8486 5.99958 12.9461 6.01899 13.0372 6.0567C13.1282 6.09442 13.2109 6.14969 13.2806 6.21937C13.3503 6.28906 13.4056 6.37178 13.4433 6.46283C13.481 6.55387 13.5004 6.65145 13.5004 6.75C13.5004 6.84855 13.481 6.94613 13.4433 7.03717C13.4056 7.12822 13.3503 7.21094 13.2806 7.28063ZM19.5 9.75C19.5 11.6784 18.9282 13.5634 17.8568 15.1668C16.7855 16.7702 15.2627 18.0199 13.4812 18.7578C11.6996 19.4958 9.73919 19.6889 7.84787 19.3127C5.95656 18.9365 4.21928 18.0079 2.85571 16.6443C1.49215 15.2807 0.563554 13.5434 0.187348 11.6521C-0.188858 9.76082 0.00422452 7.80042 0.742179 6.01884C1.48013 4.23726 2.72982 2.71451 4.33319 1.64317C5.93657 0.571828 7.82164 0 9.75 0C12.335 0.00272983 14.8134 1.03084 16.6413 2.85872C18.4692 4.68661 19.4973 7.16498 19.5 9.75ZM18 9.75C18 8.1183 17.5161 6.52325 16.6096 5.16655C15.7031 3.80984 14.4146 2.75242 12.9071 2.12799C11.3997 1.50357 9.74085 1.34019 8.14051 1.65852C6.54017 1.97685 5.07016 2.76259 3.91637 3.91637C2.76259 5.07015 1.97685 6.54016 1.65853 8.1405C1.3402 9.74085 1.50358 11.3996 2.128 12.9071C2.75242 14.4146 3.80984 15.7031 5.16655 16.6096C6.52326 17.5161 8.11831 18 9.75 18C11.9373 17.9975 14.0343 17.1275 15.5809 15.5809C17.1275 14.0343 17.9975 11.9373 18 9.75Z"
-              fill="white"
-            />
-          </svg>
-        </button>
+      <button id="closeMusicListOverlay">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M13.2806 7.28063L10.8103 9.75L13.2806 12.2194C13.3503 12.2891 13.4056 12.3718 13.4433 12.4628C13.481 12.5539 13.5004 12.6515 13.5004 12.75C13.5004 12.8485 13.481 12.9461 13.4433 13.0372C13.4056 13.1282 13.3503 13.2109 13.2806 13.2806C13.2109 13.3503 13.1282 13.4056 13.0372 13.4433C12.9461 13.481 12.8486 13.5004 12.75 13.5004C12.6515 13.5004 12.5539 13.481 12.4628 13.4433C12.3718 13.4056 12.2891 13.3503 12.2194 13.2806L9.75 10.8103L7.28063 13.2806C7.21095 13.3503 7.12822 13.4056 7.03718 13.4433C6.94613 13.481 6.84855 13.5004 6.75 13.5004C6.65146 13.5004 6.55388 13.481 6.46283 13.4433C6.37179 13.4056 6.28906 13.3503 6.21938 13.2806C6.1497 13.2109 6.09442 13.1282 6.05671 13.0372C6.019 12.9461 5.99959 12.8485 5.99959 12.75C5.99959 12.6515 6.019 12.5539 6.05671 12.4628C6.09442 12.3718 6.1497 12.2891 6.21938 12.2194L8.68969 9.75L6.21938 7.28063C6.07865 7.13989 5.99959 6.94902 5.99959 6.75C5.99959 6.55098 6.07865 6.36011 6.21938 6.21937C6.36011 6.07864 6.55098 5.99958 6.75 5.99958C6.94903 5.99958 7.1399 6.07864 7.28063 6.21937L9.75 8.68969L12.2194 6.21937C12.2891 6.14969 12.3718 6.09442 12.4628 6.0567C12.5539 6.01899 12.6515 5.99958 12.75 5.99958C12.8486 5.99958 12.9461 6.01899 13.0372 6.0567C13.1282 6.09442 13.2109 6.14969 13.2806 6.21937C13.3503 6.28906 13.4056 6.37178 13.4433 6.46283C13.481 6.55387 13.5004 6.65145 13.5004 6.75C13.5004 6.84855 13.481 6.94613 13.4433 7.03717C13.4056 7.12822 13.3503 7.21094 13.2806 7.28063ZM19.5 9.75C19.5 11.6784 18.9282 13.5634 17.8568 15.1668C16.7855 16.7702 15.2627 18.0199 13.4812 18.7578C11.6996 19.4958 9.73919 19.6889 7.84787 19.3127C5.95656 18.9365 4.21928 18.0079 2.85571 16.6443C1.49215 15.2807 0.563554 13.5434 0.187348 11.6521C-0.188858 9.76082 0.00422452 7.80042 0.742179 6.01884C1.48013 4.23726 2.72982 2.71451 4.33319 1.64317C5.93657 0.571828 7.82164 0 9.75 0C12.335 0.00272983 14.8134 1.03084 16.6413 2.85872C18.4692 4.68661 19.4973 7.16498 19.5 9.75ZM18 9.75C18 8.1183 17.5161 6.52325 16.6096 5.16655C15.7031 3.80984 14.4146 2.75242 12.9071 2.12799C11.3997 1.50357 9.74085 1.34019 8.14051 1.65852C6.54017 1.97685 5.07016 2.76259 3.91637 3.91637C2.76259 5.07015 1.97685 6.54016 1.65853 8.1405C1.3402 9.74085 1.50358 11.3996 2.128 12.9071C2.75242 14.4146 3.80984 15.7031 5.16655 16.6096C6.52326 17.5161 8.11831 18 9.75 18C11.9373 17.9975 14.0343 17.1275 15.5809 15.5809C17.1275 14.0343 17.9975 11.9373 18 9.75Z"
+            fill="white"
+          />
+        </svg>
+      </button>
       <div id="songsList"></div>
     </div>
 
-
     <!-- ----------------------------->
 
-    <audio src="/items/music/ringtone/ringtone1.mp3" id="musicRingTone" class="hidden"></audio>
-
-
+    <audio
+      src="/items/music/ringtone/ringtone1.mp3"
+      id="musicRingTone"
+      class="hidden"
+    ></audio>
   </body>
   <script type="module" src="/script.js"></script>
 </html>
