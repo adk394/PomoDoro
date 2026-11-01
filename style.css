@@ -324,6 +324,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 1000;
 }
 
 

@@ -211,12 +211,11 @@ async function startApp() {
   times.minutes.innerHTML = firstUpdate.minutes;
 }
 
-startApp();
-
 async function iniciarApp() {
+  startApp();
   await cargarRelojes();
-  loadingScreen.classList.add("hidden")
-  clockMainDiv.classList.remove("hidden"); // ahora sí se muestra
+  loadingScreen.classList.add("hidden"); // ahora sí se muestra
+  clockMainDiv.classList.remove("hidden");
 }
 
 iniciarApp();
