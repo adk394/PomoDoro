@@ -52,6 +52,7 @@ let times = {
 
 let clocks = {
   cicles: 1,
+  autoStart: false,
   flow: {
     title: "Pomodoro",
     lap: 1,
@@ -82,7 +83,10 @@ const authForm = document.getElementById("authForm");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const btnRegistro = document.getElementById("btnRegister");
-let messageError = document.getElementById("messageError")
+let clockMainDiv = document.querySelector(".clockMainDiv");
+let messageError = document.getElementById("messageError");
+let currentBackground = "./items/backgrounds/original.svg";
+let loadingScreen = document.querySelector(".loadingScreen");
 
 // GUARDAR: de clocks -> base de datos
 async function guardarRelojes() {
@@ -106,11 +110,11 @@ async function guardarRelojes() {
       short_seconds: Number(clocks.shortPause.seconds),
       long_minutes: Number(clocks.longPause.minutes),
       long_seconds: Number(clocks.longPause.seconds),
+      background: currentBackground,
       updated_at: new Date().toISOString(),
     },
     { onConflict: "user_id" },
   );
-
   if (errorGuardar) {
     console.log("Error al guardar:", errorGuardar.message);
     return;
@@ -142,6 +146,11 @@ async function cargarRelojes() {
     shortPause: "short",
     longPause: "long",
   };
+
+  if (data.background) {
+    currentBackground = data.background;
+    clockMainDiv.style.backgroundImage = `url("${currentBackground}")`;
+  }
 
   for (const [claveObjeto, prefijo] of Object.entries(tipos)) {
     clocks[claveObjeto].minutes = String(data[`${prefijo}_minutes`]).padStart(
@@ -190,7 +199,7 @@ const {
 if (session) {
   messageError.innerHTML = ("Logueado como:", session.user.email);
 } else {
-  messageError.innerHTML = ("No hay sesión");
+  messageError.innerHTML = "No hay sesión";
 }
 
 async function startApp() {
@@ -202,7 +211,15 @@ async function startApp() {
   times.minutes.innerHTML = firstUpdate.minutes;
 }
 
-startApp()
+startApp();
+
+async function iniciarApp() {
+  await cargarRelojes();
+  loadingScreen.classList.add("hidden")
+  clockMainDiv.classList.remove("hidden"); // ahora sí se muestra
+}
+
+iniciarApp();
 
 // ------------------------------------------------------------
 
@@ -302,15 +319,15 @@ miniPlayer.addEventListener("click", async () => {
   pipWindow = await documentPictureInPicture.requestWindow({
     width: 320,
     height: 180,
-  }); 
+  });
 
-  const marcador = document.createComment("reloj")
-  player.before(marcador)
+  const marcador = document.createComment("reloj");
+  player.before(marcador);
   pipWindow.document.body.appendChild(player);
 
   phpWindoww.addEventListener("pagehide", () => {
-    marcador.replaceWith(player)
-  })
+    marcador.replaceWith(player);
+  });
 });
 
 // ----------------------------------------------------
@@ -331,21 +348,43 @@ let closeMusicListOverlay = document.getElementById("closeMusicListOverlay");
 let overlay = document.getElementById("mainOverlay");
 
 let themeSelector = document.querySelectorAll(".configNav #themeSelect");
-let clockMainDiv = document.querySelector(".clockMainDiv");
 
 let openMusicBar = document.getElementById("openMusicBar");
 let insideMusicBar = document.getElementById("insideMusicBar");
 let musicBar = document.getElementById("musicBar");
 
-let svgOpenBar = document.getElementById("svgOpenBar")
-let svgCloseBar = document.getElementById("svgCloseBar")
+let svgOpenBar = document.getElementById("svgOpenBar");
+let svgCloseBar = document.getElementById("svgCloseBar");
 
 let musicListOverlay = document.getElementById("musicListOverlay");
 let listMiniRep = document.getElementById("listMiniRep");
 let songsList = document.getElementById("songsList");
 
-
 let objectSelected;
+
+let selectorFontType = document.querySelectorAll(".configNav #typeText");
+let clockTitle = document.getElementById("clockTitle");
+let watchClock = document.querySelector(".watchClock");
+
+let autoStartButton = document.getElementById("autoStartButton");
+let onOff = document.getElementById("onOff");
+
+autoStartButton.addEventListener("click", () => {
+  clocks.autoStart = !clocks.autoStart;
+  if (clocks.autoStart == true) {
+    onOff.innerHTML = "ON";
+  } else {
+    onOff.innerHTML = "OFF";
+  }
+});
+
+selectorFontType.forEach((fontType) => {
+  fontType.addEventListener("click", async () => {
+    console.log(fontType.textContent);
+    clockTitle.style.fontFamily = fontType.textContent;
+    watchClock.style.fontFamily = fontType.textContent;
+  });
+});
 
 function renderPlaylist() {
   music.forEach((song) => {
@@ -367,8 +406,8 @@ listMiniRep.addEventListener("click", () => {
 });
 
 openMusicBar.addEventListener("click", () => {
-  svgCloseBar.classList.toggle("hidden")
-  svgOpenBar.classList.toggle("hidden")
+  svgCloseBar.classList.toggle("hidden");
+  svgOpenBar.classList.toggle("hidden");
 
   insideMusicBar.classList.toggle("hidden");
   musicBar.classList.toggle("musicBarCompact");
@@ -472,7 +511,7 @@ function getTotalTime() {
 
 let musicRingTone = document.getElementById("musicRingTone");
 
-startButton.addEventListener("click", () => {
+function start() {
   let objectSelected = whatClockIsSelected();
 
   document.title = `Essy | ${objectSelected.title}`;
@@ -561,14 +600,19 @@ startButton.addEventListener("click", () => {
       times.minutes.innerHTML = objectSelected.minutes;
       if (clocks.cicles !== 4) {
         console.log(clocks.cicles++);
-        avisar("Ciclo terminado", "🍅");
+        avisar(`${objectSelected.title} terminado`, "🌼");
       } else if (clocks.cicles >= 4) {
-        avisar("Pomodoro terminado", ":D :D :D 🍅🍅🍅");
+        avisar("Pomodoro terminado", "🪷");
         clocks.cicles = 0;
+      }
+      if (clocks.autoStart === true) {
+        start();
       }
     }
   }, 1000);
-});
+}
+
+startButton.addEventListener("click", start);
 
 ///---STOP
 
@@ -682,8 +726,10 @@ longButton.addEventListener("click", () => {
 
 themeSelector.forEach((theme) => {
   theme.addEventListener("click", () => {
+    currentBackground = theme.value;
     console.log(theme.value);
-    clockMainDiv.style.backgroundImage = `url("${theme.value}")`;
+    clockMainDiv.style.backgroundImage = `url("${currentBackground}")`;
+    guardarRelojes();
   });
 });
 
@@ -696,11 +742,14 @@ function whatClockIsSelected() {
   }
 }
 
-let clockTitle = document.getElementById("clockTitle");
-
 let minsFlow = document.querySelectorAll(".configNav #minFlow");
 let minsShort = document.querySelectorAll(".configNav #minShort");
 let minsLong = document.querySelectorAll(".configNav #minLong");
+
+function correctZero() {
+  times.seconds.innerHTML = times.seconds.innerHTML.padStart(2, "0");
+  times.minutes.innerHTML = times.minutes.innerHTML.padStart(2, "0");
+}
 
 minsFlow.forEach((minFlow) => {
   minFlow.addEventListener("click", async () => {
@@ -711,6 +760,7 @@ minsFlow.forEach((minFlow) => {
       times.minutes.innerHTML = clocks.flow.minutes;
     }
     console.log(minFlow.value);
+    correctZero();
   });
 });
 
@@ -723,6 +773,7 @@ minsShort.forEach((minShort) => {
       times.minutes.innerHTML = clocks.shortPause.minutes;
     }
     console.log(minShort.value);
+    correctZero();
   });
 });
 
@@ -734,5 +785,6 @@ minsLong.forEach((minLong) => {
       times.minutes.innerHTML = clocks.longPause.minutes;
     }
     console.log(minLong.value);
+    correctZero();
   });
 });

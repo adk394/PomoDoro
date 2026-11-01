@@ -22,6 +22,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Silkscreen";
+  src: url("./items/fonts/Silkscreen/slkscr.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 ::selection {
   background-color: #b4b4b49f; /* color del resaltado */
   color: #050505; /* color del texto seleccionado */
@@ -312,6 +320,13 @@ button:hover {
   gap: 0rem;
 }
 
+.loadingScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .musicBarCompact {
   transition: 500ms;
   background-color: #171717ad;
@@ -322,6 +337,40 @@ button:hover {
   padding: 0.5rem;
   margin-left: 3rem;
   border-radius: 1.5rem;
+}
+
+#onOff {
+  border-radius: 0.25rem;
+  font-size: 0.6rem;
+}
+
+#separator {
+  width: 100%;
+  background-color: #0505051f;
+  height: 0.05rem;
+  border-radius: 5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+#typeText {
+  width: 100%;
+  padding-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  padding-left: 0.25rem;
+  height: 1.5rem;
+  font-size: 0.9rem;
+  transition: 150ms;
+  background-color: #ffffff00;
+  color: black;
+}
+
+#typeText:hover {
+  cursor: pointer;
+  color: white;
+  background-color: rgba(102, 102, 102, 0.75);
+  border-radius: 0.5rem;
 }
 
 #audioRange {
@@ -562,7 +611,7 @@ blobLong,
 }
 
 #clockTitle {
-  font-family: "SFPro";
+  font-family: "SFPro Rounded";
   font-size: 2rem;
   margin: 0rem;
   font-weight: 500;
