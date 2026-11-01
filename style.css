@@ -485,16 +485,14 @@ button:hover {
 #menuSoftTitle {
   cursor: auto;
   font-family: "SFPro";
-  margin-bottom: 0.25rem;
   display: flex;
   align-items: center;
   padding-left: 0.25rem;
-  border-bottom: 2px #0000001f solid;
   height: 1.5rem;
   font-size: 0.8rem;
   transition: 150ms;
   background-color: #ffffff00;
-  color: rgb(32, 32, 32);
+  color: rgb(66, 66, 66);
 }
 
 #musicListOverlay {
