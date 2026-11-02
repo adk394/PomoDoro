@@ -1,14 +1,7 @@
 <svg id="visual" viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
     <style>
-    .ola { transform-box: fill-box; transform-origin: center bottom; }
-    .ola1 { animation: balanceo 6s ease-in-out infinite alternate; }
-    .ola2 { animation: balanceo 8s ease-in-out infinite alternate; }
-    .ola3 { animation: balanceo 10s ease-in-out infinite alternate; }
-    @keyframes balanceo {
-      from { transform: translateY(0); }
-      to   { transform: translateY(-20px); }
-    }
+
   </style>
     <rect x="0" y="0" width="900" height="600" fill="#171717"></rect>
     <path

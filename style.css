@@ -24,11 +24,36 @@
 
 @font-face {
   font-family: "Silkscreen";
-  src: url("./items/fonts/Silkscreen/slkscr.ttf")
-    format("truetype");
+  src: url("./items/fonts/Silkscreen/slkscr.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
+
+/* Backgrounds */
+
+.ola {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+.ola1 {
+  animation: balanceo 6s ease-in-out infinite alternate;
+}
+.ola2 {
+  animation: balanceo 8s ease-in-out infinite alternate;
+}
+.ola3 {
+  animation: balanceo 10s ease-in-out infinite alternate;
+}
+@keyframes balanceo {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-20px);
+  }
+}
+
+/* ------------ */
 
 ::selection {
   background-color: #b4b4b49f; /* color del resaltado */
@@ -327,7 +352,6 @@ button:hover {
   transition: 1000;
 }
 
-
 .musicBarCompact {
   transition: 500ms;
   background-color: #171717ad;
@@ -610,7 +634,7 @@ blobLong,
 }
 
 #clockTitle {
-  font-family: "SFPro Rounded";
+  font-family: "SFPro";
   font-size: 2rem;
   margin: 0rem;
   font-weight: 500;
