@@ -1,6 +1,4 @@
 import { supabase } from "./database/supabase.js";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-
 
 let music = [
   {
