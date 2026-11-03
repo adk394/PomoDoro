@@ -161,12 +161,14 @@ async function cargarRelojes() {
     clockMainDiv.style.backgroundColor = `${currentColor}`;
   }
 
-  
   if (data.textColor) {
     currentTextColor = data.textColor;
     clockMainDiv.style.color = `${currentTextColor}`;
     allSvgs.forEach((svg) => {
       svg.style.fill = `${currentTextColor}`;
+    });
+    blobs.forEach((blob) => {
+      blob.style.backgroundColor = `${currentTextColor}80`;
     });
   }
 
@@ -900,15 +902,9 @@ colorSelector.forEach((color) => {
     allSvgs.forEach((svg) => {
       svg.style.fill = `${currentTextColor}`;
     });
-    // if (currentColor === "#ffffff") {
-    //   blobs.forEach((blob) => {
-    //     blob.style.backgroundColor = `#17171780`;
-    //   });
-    // } else {
-    //   blobs.forEach((blob) => {
-    //     blob.style.backgroundColor = `#ffffff80`;
-    //   });
-    // }
+    blobs.forEach((blob) => {
+      blob.style.backgroundColor = `${currentTextColor}80`;
+    });
     guardarRelojes();
   });
 });
