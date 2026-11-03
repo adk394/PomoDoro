@@ -161,8 +161,8 @@ async function cargarRelojes() {
     clockMainDiv.style.backgroundColor = `${currentColor}`;
   }
 
-  if (data.textColor) {
-    currentTextColor = data.textColor;
+  if (data.text_color) {
+    currentTextColor = data.text_color;
     clockMainDiv.style.color = `${currentTextColor}`;
     allSvgs.forEach((svg) => {
       svg.style.fill = `${currentTextColor}`;
