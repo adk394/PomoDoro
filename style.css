@@ -60,6 +60,8 @@
   color: #050505; /* color del texto seleccionado */
 }
 
+
+
 a {
   color: black;
 }
@@ -96,6 +98,11 @@ svg {
   justify-content: center;
 }
 
+/* body, button, a, input {
+  cursor: url(/items/backgrounds/cursor.png) 0 0, auto;
+} */
+
+
 body {
   background-repeat: no-repeat;
   background-size: cover;
@@ -106,7 +113,7 @@ body {
   font-family: "SFPro";
   min-height: 90vh;
   /* Background with image */
-  background-color: #171717;
+  background-color: #000000;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -126,6 +133,8 @@ button:hover {
   border-radius: 0.5rem;
 }
 
+
+
 .musicFunctionBtn {
   background-color: rgba(228, 228, 228, 0);
   border: 0px;
@@ -141,6 +150,9 @@ button:hover {
   border: 2px rgba(255, 255, 255, 0) solid;
   padding: 0.25rem;
   background-color: rgba(255, 255, 255, 0);
+  path {
+    fill: black !important;
+  }
 }
 
 .menuButton:hover {
@@ -148,7 +160,7 @@ button:hover {
   color: white;
   background-color: rgba(102, 102, 102, 0.75);
   #arrowMenu {
-    fill: white;
+    fill: white !important;
   }
 }
 
@@ -323,13 +335,13 @@ button:hover {
 
 .clockMainDiv {
   display: flex;
-  border: 1px white solid;
   flex-direction: column;
   justify-self: center;
   align-items: center;
   text-align: center;
   /* Background with image */
-  background-image: url(/items/backgrounds/original.svg);
+  background-color: #171717;
+  background-image: url(/items/backgrounds/original-noback.svg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -420,6 +432,10 @@ button:hover {
   border-radius: 1.5rem;
   justify-self: start;
   margin-left: 3rem;
+  color: white !important;
+  path {
+    fill: white !important;
+  }
 }
 
 #musicListBar {
@@ -444,6 +460,9 @@ button:hover {
   align-self: center;
   justify-self: center;
   padding-right: 0.75rem;
+  path {
+    fill: white !important;
+  }
 }
 
 #musicTitle {
@@ -479,7 +498,7 @@ button:hover {
   border-radius: 1.15rem;
   padding: 1.5rem;
   background-color: rgb(228, 228, 228);
-  background-image: url(/items/music/icons/jazz.png);
+  background-image: url(/items/music/icons/animal.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -489,7 +508,7 @@ button:hover {
   border-radius: 1.15rem;
   padding: 2.1rem;
   background-color: rgb(228, 228, 228);
-  background-image: url(/items/music/icons/jazz.png);
+  background-image: url(/items/music/icons/animal.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -646,6 +665,9 @@ blobLong,
   border: 0px;
   circle {
     transition: 200ms;
+  }
+  path {
+    fill: white !important;
   }
 }
 

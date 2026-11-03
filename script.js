@@ -2,28 +2,28 @@ import { supabase } from "./database/supabase.js";
 
 let music = [
   {
-    title: "Jazz Song",
+    title: "Jazz Default",
     artist: "Anon",
     src: "/items/music/jazz.mp3",
-    icon: "/items/music/icons/white.png",
+    icon: "/items/music/icons/animal.jpg",
   },
   {
     title: "Minecraft - Minecraft Volume Alpha",
     artist: "C418",
     src: "/items/music/minecraft1.mp3",
-    icon: "/items/music/icons/red.png",
+    icon: "/items/music/icons/minecraft.jpg",
   },
   {
-    title: "Skinny Song",
-    artist: "Anon",
-    src: "/items/music/jazz.mp3",
-    icon: "/items/music/icons/peomona.png",
+    title: "Honey Comb",
+    artist: "ggg.",
+    src: "/items/music/bluematchalatte.mp3",
+    icon: "/items/music/icons/cat1.jpg",
   },
   {
-    title: "Ourense",
-    artist: "C418",
-    src: "/items/music/minecraft1.mp3",
-    icon: "/items/music/icons/pino.png",
+    title: "Blue matcha",
+    artist: "ggg.",
+    src: "/items/music/honeycomb.mp3",
+    icon: "/items/music/icons/sheep1.jpg",
   },
   {
     title: "Pip Pip",
@@ -86,6 +86,8 @@ const btnRegistro = document.getElementById("btnRegister");
 let clockMainDiv = document.querySelector(".clockMainDiv");
 let messageError = document.getElementById("messageError");
 let currentBackground = "./items/backgrounds/original.svg";
+let currentColor = "#171717";
+let currentTextColor = "#ffffff";
 let loadingScreen = document.querySelector(".loadingScreen");
 
 // GUARDAR: de clocks -> base de datos
@@ -111,6 +113,8 @@ async function guardarRelojes() {
       long_minutes: Number(clocks.longPause.minutes),
       long_seconds: Number(clocks.longPause.seconds),
       background: currentBackground,
+      color: currentColor,
+      textColor: currentTextColor,
       updated_at: new Date().toISOString(),
     },
     { onConflict: "user_id" },
@@ -150,6 +154,20 @@ async function cargarRelojes() {
   if (data.background) {
     currentBackground = data.background;
     clockMainDiv.style.backgroundImage = `url("${currentBackground}")`;
+  }
+
+  if (data.color) {
+    currentColor = data.color;
+    clockMainDiv.style.backgroundColor = `${currentColor}`;
+  }
+
+  
+  if (data.textColor) {
+    currentTextColor = data.textColor;
+    clockMainDiv.style.color = `${currentTextColor}`;
+    allSvgs.forEach((svg) => {
+      svg.style.fill = `${currentTextColor}`;
+    });
   }
 
   for (const [claveObjeto, prefijo] of Object.entries(tipos)) {
@@ -482,6 +500,9 @@ let closeMusicListOverlay = document.getElementById("closeMusicListOverlay");
 let overlay = document.getElementById("mainOverlay");
 
 let themeSelector = document.querySelectorAll(".configNav #themeSelect");
+let colorSelector = document.querySelectorAll(".configNav #colorSelect");
+
+let blobs = document.querySelectorAll(".blob");
 
 let openMusicBar = document.getElementById("openMusicBar");
 let insideMusicBar = document.getElementById("insideMusicBar");
@@ -867,6 +888,31 @@ themeSelector.forEach((theme) => {
   });
 });
 
+let allSvgs = document.body.querySelectorAll(".clockMainDiv svg path");
+
+colorSelector.forEach((color) => {
+  color.addEventListener("click", () => {
+    currentColor = color.value;
+    currentTextColor = color.name;
+    console.log(color.value);
+    clockMainDiv.style.backgroundColor = `${currentColor}`;
+    clockMainDiv.style.color = `${currentTextColor}`;
+    allSvgs.forEach((svg) => {
+      svg.style.fill = `${currentTextColor}`;
+    });
+    // if (currentColor === "#ffffff") {
+    //   blobs.forEach((blob) => {
+    //     blob.style.backgroundColor = `#17171780`;
+    //   });
+    // } else {
+    //   blobs.forEach((blob) => {
+    //     blob.style.backgroundColor = `#ffffff80`;
+    //   });
+    // }
+    guardarRelojes();
+  });
+});
+
 function whatClockIsSelected() {
   for (let clock in clocks) {
     if (clocks[clock].isSelected === true) {
@@ -888,10 +934,13 @@ function correctZero() {
 minsFlow.forEach((minFlow) => {
   minFlow.addEventListener("click", async () => {
     clocks.flow.minutes = minFlow.value;
+    clocks.flow.seconds = "00";
+
     await guardarRelojes();
 
     if (clocks.flow.isSelected === true) {
       times.minutes.innerHTML = clocks.flow.minutes;
+      times.seconds.innerHTML = clocks.flow.seconds;
     }
     console.log(minFlow.value);
     correctZero();
@@ -901,10 +950,13 @@ minsFlow.forEach((minFlow) => {
 minsShort.forEach((minShort) => {
   minShort.addEventListener("click", async () => {
     clocks.shortPause.minutes = minShort.value;
+    clocks.shortPause.seconds = "00";
+
     await guardarRelojes();
 
     if (clocks.shortPause.isSelected === true) {
       times.minutes.innerHTML = clocks.shortPause.minutes;
+      times.minutes.innerHTML = clocks.shortPause.seconds;
     }
     console.log(minShort.value);
     correctZero();
@@ -914,9 +966,11 @@ minsShort.forEach((minShort) => {
 minsLong.forEach((minLong) => {
   minLong.addEventListener("click", () => {
     clocks.longPause.minutes = minLong.value;
+    clocks.longPause.seconds = "00";
 
     if (clocks.longPause.isSelected === true) {
       times.minutes.innerHTML = clocks.longPause.minutes;
+      times.seconds.innerHTML = clocks.longPause.seconds;
     }
     console.log(minLong.value);
     correctZero();

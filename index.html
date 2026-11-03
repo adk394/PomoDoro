@@ -15,8 +15,8 @@
   <body class="halftone">
     <div class="loadingScreen">
       <svg
-        width="138"
-        height="136"
+        width="100"
+        height="100"
         viewBox="0 0 138 136"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -243,140 +243,366 @@
               </svg>
             </button>
             <ul class="submenu">
-              <button
-                class="menuButton"
-                id="themeSelect"
-                value="./items/backgrounds/original.svg"
-              >
-                Essy
-                <div
-                  style="
-                    background: linear-gradient(#fa7268, #df7890);
-                    width: 0.75rem;
-                    height: 0.75rem;
-                    border-radius: 1rem;
-                    border: 2px rgb(71, 71, 71) solid;
-                  "
-                ></div>
-              </button>
-              <button
-                class="menuButton"
-                id="themeSelect"
-                value="./items/backgrounds/blurbabe.svg"
-              >
-                Ocean
-                <div
-                  style="
-                    background: linear-gradient(#2e62c4, #98c2f8);
-                    width: 0.75rem;
-                    height: 0.75rem;
-                    border-radius: 1rem;
-                    border: 2px rgb(71, 71, 71) solid;
-                  "
-                ></div>
-              </button>
-              <button
-                class="menuButton"
-                id="themeSelect"
-                value="./items/backgrounds/colmena.svg"
-              >
-                Hive
-                <div
-                  style="
-                    background: linear-gradient(#afa67b, #ccb42f);
-                    width: 0.75rem;
-                    height: 0.75rem;
-                    border-radius: 1rem;
-                    border: 2px rgb(71, 71, 71) solid;
-                  "
-                ></div>
-              </button>
-              <button
-                class="menuButton"
-                id="themeSelect"
-                value="./items/backgrounds/synthwave.svg"
-              >
-                SynthWave
-                <div
-                  style="
-                    background: linear-gradient(
-                      #8c45b4,
-                      #b95f9b,
-                      #df6c6c,
-                      #f3cc61
-                    );
-                    width: 0.75rem;
-                    height: 0.75rem;
-                    border-radius: 1rem;
-                    border: 2px rgb(71, 71, 71) solid;
-                  "
-                ></div>
-              </button>
-              <button
-                class="menuButton"
-                id="themeSelect"
-                value="./items/backgrounds/Gum.svg"
-              >
-                Gum
-                <div
-                  style="
-                    background: linear-gradient(#c62368, #ffaeda);
-                    width: 0.75rem;
-                    height: 0.75rem;
-                    border-radius: 1rem;
-                    border: 2px rgb(71, 71, 71) solid;
-                  "
-                ></div>
-              </button>
-              <button
-                class="menuButton"
-                id="themeSelect"
-                value="./items/backgrounds/bosque-2.svg"
-              >
-                Forest
-                <div
-                  style="
-                    background: linear-gradient(#166333, #325a30);
-                    width: 0.75rem;
-                    height: 0.75rem;
-                    border-radius: 1rem;
-                    border: 2px rgb(71, 71, 71) solid;
-                  "
-                ></div>
-              </button>
+              <li>
+                <button class="menuButton">
+                  Theme
+                  <svg
+                    width="7"
+                    height="11"
+                    viewBox="0 0 5 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      id="arrowMenu"
+                      d="M4.87781 4.78942L0.711611 8.88012C0.672902 8.91813 0.626949 8.94827 0.576374 8.96884C0.525799 8.98941 0.471593 9 0.416852 9C0.36211 9 0.307904 8.98941 0.257329 8.96884C0.206755 8.94827 0.160801 8.91813 0.122093 8.88012C0.0833846 8.84211 0.0526795 8.79699 0.0317308 8.74733C0.010782 8.69767 0 8.64445 0 8.5907C0 8.53695 0.010782 8.48373 0.0317308 8.43407C0.0526795 8.38441 0.0833846 8.33929 0.122093 8.30128L3.99406 4.5L0.122093 0.698715C0.043918 0.621957 -8.23706e-10 0.51785 0 0.409298C8.23707e-10 0.300745 0.043918 0.196639 0.122093 0.11988C0.200268 0.0431223 0.306296 8.08779e-10 0.416852 0C0.527408 -8.08779e-10 0.633436 0.0431223 0.711611 0.11988L4.87781 4.21058C4.91655 4.24857 4.94728 4.29369 4.96824 4.34335C4.98921 4.39301 5 4.44624 5 4.5C5 4.55376 4.98921 4.60699 4.96824 4.65665C4.94728 4.70631 4.91655 4.75143 4.87781 4.78942Z"
+                      fill="black"
+                    />
+                  </svg>
+                </button>
+                <ul
+                  class="submenu"
+                  name="selectorTimeMin"
+                  id="selectorShortMin"
+                >
+                  <button
+                    class="menuButton"
+                    id="themeSelect"
+                    value="./items/backgrounds/original-noback.svg"
+                  >
+                    Essy
+                    <div
+                      style="
+                        background: linear-gradient(#fa7268, #df7890);
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="themeSelect"
+                    value="./items/backgrounds/ocean.svg"
+                  >
+                    Ocean
+                    <div
+                      style="
+                        background: linear-gradient(#2e62c4, #98c2f8);
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="themeSelect"
+                    value="./items/backgrounds/blurbabe.svg"
+                  >
+                    Turquose
+                    <div
+                      style="
+                        background: linear-gradient(#aadbd3, #3c5f59);
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="themeSelect"
+                    value="./items/backgrounds/colmena.svg"
+                  >
+                    Cream
+                    <div
+                      style="
+                        background: linear-gradient(#cec8ac, #f7e999);
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="themeSelect"
+                    value="./items/backgrounds/orange.svg"
+                  >
+                    Orange
+                    <div
+                      style="
+                        background: linear-gradient(#bc7e64, #b48e76);
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="themeSelect"
+                    value="./items/backgrounds/synthwave.svg"
+                  >
+                    SynthWave
+                    <div
+                      style="
+                        background: linear-gradient(
+                          #8c45b4,
+                          #b95f9b,
+                          #df6c6c,
+                          #f3cc61
+                        );
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="themeSelect"
+                    value="./items/backgrounds/Gum.svg"
+                  >
+                    Pink
+                    <div
+                      style="
+                        background: linear-gradient(#c62368, #ffaeda);
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="themeSelect"
+                    value="./items/backgrounds/olive.svg"
+                  >
+                    Olive
+                    <div
+                      style="
+                        background: linear-gradient(#B4D0AB, #b2cca9);
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="themeSelect"
+                    value="./items/backgrounds/bosque-2.svg"
+                  >
+                    Forest
+                    <div
+                      style="
+                        background: linear-gradient(#166333, #325a30);
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
 
-              <button
-                class="menuButton"
-                id="themeSelect"
-                value="./items/backgrounds/dusted.svg"
-              >
-                Dusted
-                <div
-                  style="
-                    background: linear-gradient(#3d2506, #9ad39d);
-                    width: 0.75rem;
-                    height: 0.75rem;
-                    border-radius: 1rem;
-                    border: 2px rgb(71, 71, 71) solid;
-                  "
-                ></div>
-              </button>
-              <button
-                class="menuButton"
-                id="themeSelect"
-                value="./items/backgrounds/burton.svg"
-              >
-                Burton
-                <div
-                  style="
-                    background: linear-gradient(#3f3f3f, #b3b3b3);
-                    width: 0.75rem;
-                    height: 0.75rem;
-                    border-radius: 1rem;
-                    border: 2px rgb(71, 71, 71) solid;
-                  "
-                ></div>
-              </button>
+                  <button
+                    class="menuButton"
+                    id="themeSelect"
+                    value="./items/backgrounds/dusted.svg"
+                  >
+                    Dusted
+                    <div
+                      style="
+                        background: linear-gradient(#3d2506, #9ad39d);
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="themeSelect"
+                    value="./items/backgrounds/burton.svg"
+                  >
+                    Burton
+                    <div
+                      style="
+                        background: linear-gradient(#3f3f3f, #b3b3b3);
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                </ul>
+                <button class="menuButton">
+                  Color
+                  <svg
+                    width="7"
+                    height="11"
+                    viewBox="0 0 5 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      id="arrowMenu"
+                      d="M4.87781 4.78942L0.711611 8.88012C0.672902 8.91813 0.626949 8.94827 0.576374 8.96884C0.525799 8.98941 0.471593 9 0.416852 9C0.36211 9 0.307904 8.98941 0.257329 8.96884C0.206755 8.94827 0.160801 8.91813 0.122093 8.88012C0.0833846 8.84211 0.0526795 8.79699 0.0317308 8.74733C0.010782 8.69767 0 8.64445 0 8.5907C0 8.53695 0.010782 8.48373 0.0317308 8.43407C0.0526795 8.38441 0.0833846 8.33929 0.122093 8.30128L3.99406 4.5L0.122093 0.698715C0.043918 0.621957 -8.23706e-10 0.51785 0 0.409298C8.23707e-10 0.300745 0.043918 0.196639 0.122093 0.11988C0.200268 0.0431223 0.306296 8.08779e-10 0.416852 0C0.527408 -8.08779e-10 0.633436 0.0431223 0.711611 0.11988L4.87781 4.21058C4.91655 4.24857 4.94728 4.29369 4.96824 4.34335C4.98921 4.39301 5 4.44624 5 4.5C5 4.55376 4.98921 4.60699 4.96824 4.65665C4.94728 4.70631 4.91655 4.75143 4.87781 4.78942Z"
+                      fill="black"
+                    />
+                  </svg>
+                </button>
+                <ul class="submenu">
+                  <button
+                    class="menuButton"
+                    id="colorSelect"
+                    value="#171717"
+                    name="#ffffff"
+                  >
+                    Black
+                    <div
+                      style="
+                        background-color: #171717;
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="colorSelect"
+                    value="#ffffff"
+                    name="#171717"
+                  >
+                    White
+                    <div
+                      style="
+                        background-color: rgb(255, 255, 255);
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="colorSelect"
+                    value="#B4D0AB"
+                    name="#50694E"
+                  >
+                    Olive
+                    <div
+                      style="
+                        background-color: #b4d0ab;
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="colorSelect"
+                    value="#AADBD3"
+                    name="#324240"
+                  >
+                    Turquose
+                    <div
+                      style="
+                        background-color: #aadbd3;
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="colorSelect"
+                    value="#4E71B2"
+                    name="#20304E"
+                  >
+                    Ocean
+                    <div
+                      style="
+                        background-color: #4e71b2;
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="colorSelect"
+                    value="#D49DB1"
+                    name="#4B333C"
+                  >
+                    Pink
+                    <div
+                      style="
+                        background-color: #d49db1;
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="colorSelect"
+                    value="#BC7E64"
+                    name="#4D2105"
+                  >
+                    Orange
+                    <div
+                      style="
+                        background-color: #bc7e64;
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="menuButton"
+                    id="colorSelect"
+                    value="#CFD0AB"
+                    name="#464735"
+                  >
+                    Cream
+                    <div
+                      style="
+                        background-color: #cfd0ab;
+                        width: 0.75rem;
+                        height: 0.75rem;
+                        border-radius: 1rem;
+                        border: 2px rgb(71, 71, 71) solid;
+                      "
+                    ></div>
+                  </button>
+                </ul>
+              </li>
             </ul>
           </li>
 
@@ -941,11 +1167,7 @@
 
     <!-- ----------------------------->
 
-    <audio
-      src="/items/music/jazz.mp3"
-      id="musicAudio"
-      class="hidden"
-    ></audio>
+    <audio src="/items/music/jazz.mp3" id="musicAudio" class="hidden"></audio>
 
     <audio
       src="/items/music/ringtone/ringtone1.mp3"
