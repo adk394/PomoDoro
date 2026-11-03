@@ -114,7 +114,7 @@ async function guardarRelojes() {
       long_seconds: Number(clocks.longPause.seconds),
       background: currentBackground,
       color: currentColor,
-      textColor: currentTextColor,
+      text_color: currentTextColor,
       updated_at: new Date().toISOString(),
     },
     { onConflict: "user_id" },
