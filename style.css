@@ -334,7 +334,7 @@ button:hover {
   width: 35%;
 }
 
-.clockMainDiv {
+.clockMainDiv { 
   display: flex;
   flex-direction: column;
   justify-self: center;
@@ -351,10 +351,8 @@ button:hover {
   font-family: "SFPro";
   width: 45%;
   border-radius: 2rem;
-
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-
   gap: 0rem;
 }
 
@@ -671,6 +669,8 @@ blobLong,
     fill: white !important;
   }
 }
+
+
 
 #Stop:hover,
 #Start:hover {

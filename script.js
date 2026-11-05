@@ -329,7 +329,6 @@ let miniPlayer = document.getElementById("miniPlayer");
 let pipWindow;
 let player = document.getElementById("clock");
 let title = document.getElementById("clockTitle");
-let dots = document.getElementById("whatClock");
 let stopstart = document.querySelector(".switchState");
 
 miniPlayer.addEventListener("click", async () => {
@@ -339,8 +338,9 @@ miniPlayer.addEventListener("click", async () => {
   }
 
   pipWindow = await documentPictureInPicture.requestWindow({
-    width: 320,
-    height: 180,
+    width: 300,
+    height: 140,
+    disallowReturnToOpener: true,
   });
 
   const marcador = document.createComment("reloj");
@@ -356,21 +356,20 @@ miniPlayer.addEventListener("click", async () => {
   }
 
   body {
+  font-variant-numeric: tabular-nums;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  align-content: center;
   background-image: url(${currentBackground});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-color: rgba(243, 200, 200, 0.75);
-  color: white;
+  background-color: ${currentColor};
+  color: ${currentTextColor};
   margin: 0;
   padding: 0;
-  height: 100%;
   overflow: hidden; 
+
   }
 
   svg {
@@ -379,13 +378,11 @@ miniPlayer.addEventListener("click", async () => {
   }
 
   #clock {
-  font-size: 2.5rem ;
+  font-size: 3rem ;
   border: 0px;
   display: flex;
   font-family: "SFPro";
   flex-direction: row;
-  justify-self: center;
-  align-self: center;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -402,85 +399,56 @@ miniPlayer.addEventListener("click", async () => {
   margin:0;
   }
 
-
-
-
   .blob {
   transition: 150ms;
   border-radius: 1rem;
   width: 0.25rem;
   height: 0.25rem;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: ${currentTextColor}80;
   border: 0px #ffffff7c solid;
 }
 
 .blob:hover {
   transition: 150ms;
   border-radius: 1rem;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: ${currentTextColor};
+  opacity: 0.5;
 }
 
 .blobSelected {
   transition: 150ms;
   width: 0.25rem;
   height: 0.25rem;
-  background-color: #ffffff;
+  background-color: ${currentTextColor};
 }
 
 .blobActive {
   transition: 150ms;
   width: 0.5rem;
   height: 0.25rem;
-  background-color: #ffffff;
 }
 
 #clockTitle {
+  padding-top: 1rem;
   font-family: "SFPro";
   font-size: 1rem;
   margin: 0rem;
   font-weight: 500;
 }
 
-.switchState {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  margin: 1rem;
-  width: 1rem;
-  heigth: 1rem;
-}
-
 .hidden {
   display: none !important;
 }
-  
-#Stop,
-#Start {
-  background-color: rgba(255, 255, 255, 0);
-  border: 0px;
-  circle {
-    transition: 200ms;
-  }
-}
 
-#Stop:hover,
-#Start:hover {
-  circle {
-    transition: 200ms;
-    fill-opacity: 0.65;
-  }
-}
 `;
   player.before(marcador);
   pipWindow.document.head.appendChild(estilo);
+
   pipWindow.document.body.appendChild(title);
   pipWindow.document.body.appendChild(player);
-  pipWindow.document.body.appendChild(dots);
-  pipWindow.document.body.appendChild(stopstart);
 
-  phpWindoww.addEventListener("pagehide", () => {
-    marcador.replaceWith(player);
+  pipWindow.addEventListener("pagehide", () => {
+    marcador.replaceWith(title, player);
   });
 });
 
